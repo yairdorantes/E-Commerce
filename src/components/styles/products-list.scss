@@ -1,0 +1,80 @@
+.container-cards-products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 90px;
+}
+.product-card {
+  position: relative;
+  color: black;
+  background-color: rgb(236, 225, 225);
+  height: 400px;
+  width: 280px;
+  border-radius: 10px;
+  hr {
+    width: 85%;
+    margin: auto;
+    margin-top: -8px;
+  }
+  //  padding: 10px;
+}
+.container-info-product {
+  padding: 15px;
+  // margin: 15px;
+  text-align: left;
+}
+.container-img-product {
+  position: relative;
+  margin: auto;
+  margin-top: 15px;
+  padding: 0px;
+  width: 95%;
+  height: 55%;
+  border-radius: 10px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-color: white;
+  // background-size: 10px;
+}
+.discount-card {
+  color: #00a650;
+  font-size: 15px;
+  font-weight: 500;
+  position: absolute;
+  margin: 2px;
+}
+
+.container-price-fav {
+  // width: 90%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  width: 85%;
+  margin: 15px;
+  bottom: 0px;
+}
+.ancient-price {
+  font-size: 13px;
+  font-weight: 100;
+  text-decoration: line-through;
+}
+.myheart {
+  position: absolute;
+  background-color: #f8f8f8e2;
+  border-radius: 50%;
+  top: 5px;
+
+  right: 5px;
+  width: 37px;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.link-from-one-product {
+  text-decoration: none;
+  color: black;
+}

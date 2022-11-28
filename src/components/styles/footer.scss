@@ -1,0 +1,25 @@
+.container-footer {
+  text-align: center;
+  width: 800px;
+  //   background-color: orange;
+  background-color: #181a1b;
+  width: 100%;
+  margin: auto;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-box {
+  display: flex;
+  gap: 25px;
+}
+.icon-footer {
+  width: 50px;
+}
+.info-footer {
+  width: 296px;
+}
+.mini-info-footer {
+  font-size: 15px;
+}

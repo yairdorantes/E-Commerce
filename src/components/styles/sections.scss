@@ -1,0 +1,39 @@
+.container-sections {
+  display: flex;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  gap: 25px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.section-product {
+  cursor: pointer;
+  background-color: #181a1b;
+  padding: 40px;
+  //   width: 150px;
+  //   height: 180px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-logo {
+  width: 60px;
+}
+
+.discount-section {
+  background-color: #58ffa8;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  //   border-radius: 10px;
+  padding: 5px;
+  color: rgb(0, 0, 0);
+}
+.link-from-section {
+  text-decoration: none;
+  color: white;
+}

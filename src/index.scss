@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap");
+
+$primary-color: green;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  color: rgb(255, 255, 255);
+  font-family: "Poppins", sans-serif;
+  background-color: rgb(8, 9, 11);
+}
