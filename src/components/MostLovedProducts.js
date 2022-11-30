@@ -26,7 +26,7 @@ const products = [
 ];
 
 products.map((produt) => {
-  console.log(produt.name);
+  // console.log(produt.name);
 });
 
 const MostLovedProducts = () => {

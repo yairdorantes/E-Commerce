@@ -8,10 +8,6 @@ import { Pagination, Navigation, Autoplay } from "swiper";
 import "./styles/offers-slide.scss";
 const offersImg = [img1, img2, img1];
 
-offersImg.map((img) => {
-  console.log(img);
-});
-
 // offersImg.map((offer) => {
 //   console.log(offer);
 // });
