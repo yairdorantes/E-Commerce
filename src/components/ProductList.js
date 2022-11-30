@@ -42,7 +42,7 @@ const ProductList = () => {
       <div className="container-cards-products">
         {products.map((product, index) => {
           return (
-            <div className="product-card">
+            <div key={index} className="product-card">
               <Link to={`/${paramsUrl.section}/${product.id}`}>
                 <div
                   className="container-img-product"

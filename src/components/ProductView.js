@@ -3,8 +3,8 @@ import img1 from "../media/p1.jpg";
 import img2 from "../media/p2.jpg";
 import img3 from "../media/p3.jpg";
 import { useEffect, useState } from "react";
-import emptyStar from "../media/emptystar.png";
-import Star from "../media/star.png";
+import GenerateStars from "./GenerateStars";
+
 const productGet = {
   id: 1,
   price: "$1.99",
@@ -34,15 +34,44 @@ Cómodo y fácil de sostener
 
 Tinta de color: Negro`,
 };
+const productOpinions = [
+  {
+    id: 1,
+    product_id: 1,
+    date: "23 abr 2022",
+    text: "hola bueno muy bueno jsjsjsj",
+    rating: 3,
+  },
+  {
+    id: 2,
+    product_id: 1,
+    date: "30 may 2022",
+    text: "excelente llego en buenas condiciones",
+    rating: 5,
+  },
+  {
+    id: 2,
+    product_id: 1,
+    date: "3 jul 2022",
+    text: "mala calidad inga tu mae xdxd jajajajajajaja jajaajajxd jajajajajajaja jajaajajxd jajajajajajaja jajaajajxd jajajajajajaja jajaajaj",
+    rating: 2,
+  },
+  {
+    id: 2,
+    product_id: 1,
+    date: "3 jul 2022",
+    text: "",
+    rating: 2,
+  },
+];
 
 const ProductView = () => {
   const [product] = useState(productGet);
   const [imgSrc, setImgSrc] = useState(product.main_image);
   const [stars] = useState(Math.floor(product.rating));
   const [stock, setStock] = useState(product.stock);
+  const [opinions, setOpinions] = useState(productOpinions);
   const [quantityChoosen, setQuantityChoosen] = useState(1);
-  const [emptyStars] = useState(5 - stars);
-  console.log(emptyStars);
   const [imgSelected, setImgSelected] = useState(0);
   const setImage = (e) => {
     setImgSrc(e.target.src);
@@ -105,26 +134,8 @@ const ProductView = () => {
           <div className="how-many-sold">{product.sales} Vendidos</div>
           <div className="product-title">{product.description}</div>
           <div className="container-stars">
-            {(() => {
-              var mystars = [];
-              for (let i = 0; i < stars; i++) {
-                mystars.push(
-                  <img key={i} className="star-rate" src={Star} alt="" />
-                );
-              }
-              return mystars;
-            })()}
-            {emptyStars > 0 &&
-              (() => {
-                var mystars = [];
-                for (let i = 0; i < emptyStars; i++) {
-                  mystars.push(
-                    <img key={i} className="star-rate" src={emptyStar} alt="" />
-                  );
-                }
-                return mystars;
-              })()}
-            {`(${product.total_opinions})`}
+            <GenerateStars fullStars={stars}></GenerateStars>
+            <span>{`(${product.total_opinions})`}</span>
           </div>
           <div className="price-product-view">
             <div className="under-price">{product.price}</div>
@@ -132,21 +143,37 @@ const ProductView = () => {
               <button onClick={reduceQuantity} className="btn-quantity">
                 -
               </button>
-              <div className="quantity-choosen">{quantityChoosen}</div>
+              <div className="quantity-choosen">
+                <strong>{quantityChoosen}</strong>
+              </div>
               <button onClick={IncreaseQuantity} className="btn-quantity">
                 +
               </button>
-              <div className="stock-info">{`(${stock} disponibles)`}</div>
             </div>
+            <div className="stock-info">{`(${stock} disponibles)`}</div>
           </div>
           <div className="container-buttons-buy-add">
             <button className="btn-buy-now">Comprar Ahora</button>
             <button className="btn-add-cart">Agregar al carrito</button>
           </div>
-          <div className="container-features-details">
-            <div>Descripcion</div>
-            <p>{product.product_details}</p>
-          </div>
+        </div>
+        <div className="container-features-details">
+          <div>Descripcion</div>
+          <p>{product.product_details}</p>
+        </div>
+        <div className="container-opinions">
+          {opinions.map((opinion, key) => {
+            return (
+              <div key={key} className="opinion-box">
+                <div>
+                  <GenerateStars fullStars={opinion.rating}></GenerateStars>
+                  <div>{opinion.date}</div>
+                </div>
+                <p>{opinion.text}</p>
+                <hr />
+              </div>
+            );
+          })}
         </div>
       </div>
     </>
