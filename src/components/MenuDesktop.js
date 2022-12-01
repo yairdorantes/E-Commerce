@@ -2,6 +2,7 @@ import React from "react";
 import carrito from "../media/cart.png";
 import userIcon from "../media/usuario.png";
 import searchIcon from "../media/search.png";
+import { Link } from "react-router-dom";
 const MenuDesktop = () => {
   return (
     <>
@@ -39,9 +40,11 @@ const MenuDesktop = () => {
               <img className="icon-menu-bar-desktop" src={userIcon} alt="" />
               <span>Yair master</span>
             </div>
-            <div>
-              <img className="icon-menu-bar-desktop" src={carrito} alt="" />
-            </div>
+            <Link to="/cart/">
+              <div>
+                <img className="icon-menu-bar-desktop" src={carrito} alt="" />
+              </div>
+            </Link>
           </div>
         </div>
       </nav>

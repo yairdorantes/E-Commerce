@@ -47,24 +47,15 @@
     border-radius: 7px;
   }
 }
-.container-product-info-view {
-  // margin-top: 100px;
-  // margin-left: 20px;
-}
+
 .price-product-view {
   .under-price {
     font-size: 39px;
     font-weight: 300;
   }
-  .stock-info {
-    text-align: center;
-  }
-  .choose-quantity {
-    margin-top: 60px;
+  .container-add-dicrement {
+    margin-top: 25px;
     display: flex;
-    gap: 25px;
-    width: 100%;
-    flex-wrap: wrap;
     justify-content: center;
   }
 }
@@ -84,24 +75,6 @@
   margin: 2.5px;
 }
 
-.quantity-choosen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  // color: #52dbca;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 2.5px solid #52dbca;
-}
-.btn-quantity {
-  background-color: transparent;
-  border: none;
-  color: white;
-  width: 50px;
-  height: 50px;
-  font-size: 28px;
-}
 .btn-buy-now {
   background-color: #f68a53;
   color: white;

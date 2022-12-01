@@ -4,10 +4,13 @@ import img2 from "../media/p2.jpg";
 import img3 from "../media/p3.jpg";
 import { useEffect, useState } from "react";
 import GenerateStars from "./GenerateStars";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../actions/shoppingActions";
+import ChoosingQuantity from "./ChoosingQuantity";
 
 const productGet = {
   id: 1,
-  price: "$1.99",
+  price: 1.99,
   description:
     "Mountain bike Kugel Di-Max R29 21v frenos de disco mecánico cambios Shimano Tourney TZ color gris con pie de apoyo",
   main_image: img1,
@@ -66,23 +69,17 @@ const productOpinions = [
 ];
 
 const ProductView = () => {
+  const dispatch = useDispatch();
+
   const [product] = useState(productGet);
   const [imgSrc, setImgSrc] = useState(product.main_image);
   const [stars] = useState(Math.floor(product.rating));
   const [stock, setStock] = useState(product.stock);
   const [opinions, setOpinions] = useState(productOpinions);
-  const [quantityChoosen, setQuantityChoosen] = useState(1);
   const [imgSelected, setImgSelected] = useState(0);
   const setImage = (e) => {
     setImgSrc(e.target.src);
     setImgSelected(e.target.id);
-  };
-
-  const IncreaseQuantity = () => {
-    quantityChoosen < stock && setQuantityChoosen(quantityChoosen + 1);
-  };
-  const reduceQuantity = () => {
-    quantityChoosen > 1 && setQuantityChoosen(quantityChoosen - 1);
   };
 
   return (
@@ -134,27 +131,24 @@ const ProductView = () => {
           <div className="how-many-sold">{product.sales} Vendidos</div>
           <div className="product-title">{product.description}</div>
           <div className="container-stars">
-            <GenerateStars fullStars={stars}></GenerateStars>
+            <GenerateStars fullStars={stars} />
             <span>{`(${product.total_opinions})`}</span>
           </div>
           <div className="price-product-view">
-            <div className="under-price">{product.price}</div>
-            <div className="choose-quantity">
-              <button onClick={reduceQuantity} className="btn-quantity">
-                -
-              </button>
-              <div className="quantity-choosen">
-                <strong>{quantityChoosen}</strong>
-              </div>
-              <button onClick={IncreaseQuantity} className="btn-quantity">
-                +
-              </button>
+            <div className="under-price">${product.price}</div>
+
+            <div className="container-add-dicrement">
+              <ChoosingQuantity stock={stock} />
             </div>
-            <div className="stock-info">{`(${stock} disponibles)`}</div>
           </div>
           <div className="container-buttons-buy-add">
             <button className="btn-buy-now">Comprar Ahora</button>
-            <button className="btn-add-cart">Agregar al carrito</button>
+            <button
+              onClick={() => dispatch(addToCart(product))}
+              className="btn-add-cart"
+            >
+              Agregar al carrito
+            </button>
           </div>
         </div>
         <div className="container-features-details">
@@ -166,7 +160,7 @@ const ProductView = () => {
             return (
               <div key={key} className="opinion-box">
                 <div>
-                  <GenerateStars fullStars={opinion.rating}></GenerateStars>
+                  <GenerateStars fullStars={opinion.rating} />
                   <div>{opinion.date}</div>
                 </div>
                 <p>{opinion.text}</p>
