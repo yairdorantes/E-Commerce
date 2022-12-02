@@ -7,8 +7,7 @@ const ShoppingCart = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { cart } = state.shopping;
-  console.log(cart.length);
-  console.log(cart);
+
   return (
     <div className="container-cart">
       <div>
@@ -33,6 +32,7 @@ const ShoppingCart = () => {
                 <div className="container-extra-info">
                   <ChoosingQuantity stock={product.stock} product={product} />
                   <div> ${product.price}</div>
+                  {console.log(product.quantity)}
                   <div>${product.price * product.quantity}</div>
                 </div>
               </div>

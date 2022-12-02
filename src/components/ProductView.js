@@ -5,7 +5,7 @@ import img3 from "../media/p3.jpg";
 import { useEffect, useState } from "react";
 import GenerateStars from "./GenerateStars";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../actions/shoppingActions";
+import { addMoreToCart, addToCart } from "../actions/shoppingActions";
 import ChoosingQuantity from "./ChoosingQuantity";
 
 const productGet = {
@@ -77,9 +77,16 @@ const ProductView = () => {
   const [stock, setStock] = useState(product.stock);
   const [opinions, setOpinions] = useState(productOpinions);
   const [imgSelected, setImgSelected] = useState(0);
+  const [quantityChoosen, setQuantity] = useState(1);
   const setImage = (e) => {
     setImgSrc(e.target.src);
     setImgSelected(e.target.id);
+  };
+  const increment = () => {
+    quantityChoosen < stock && setQuantity(quantityChoosen + 1);
+  };
+  const decrement = () => {
+    quantityChoosen > 1 && setQuantity(quantityChoosen - 1);
   };
 
   return (
@@ -138,13 +145,38 @@ const ProductView = () => {
             <div className="under-price">${product.price}</div>
 
             <div className="container-add-dicrement">
-              <ChoosingQuantity stock={stock} />
+              {/* <ChoosingQuantity stock={stock} /> */}
+              <div className="choose-quantity">
+                <div className="btns-quantity">
+                  <button onClick={decrement} className="btn-quantity">
+                    -
+                  </button>
+                  <div className="quantity-choosen">
+                    <strong>{quantityChoosen}</strong>
+                  </div>
+                  <button
+                    // style={{ filter: "brightness(63%)" }}
+                    onClick={increment}
+                    className="btn-quantity"
+                  >
+                    +
+                  </button>
+                </div>
+                <div className="stock-info">{`(${stock} disponibles)`}</div>
+              </div>
             </div>
           </div>
           <div className="container-buttons-buy-add">
             <button className="btn-buy-now">Comprar Ahora</button>
             <button
-              onClick={() => dispatch(addToCart(product))}
+              onClick={() => {
+                dispatch(
+                  addMoreToCart({
+                    ...product,
+                    quantity: quantityChoosen,
+                  })
+                );
+              }}
               className="btn-add-cart"
             >
               Agregar al carrito

@@ -1,4 +1,5 @@
 import {
+  ADD_MORE_TO_CART,
   ADD_TO_CART,
   CLEAR_CART,
   REMOVE_ALL_FROM_CART,
@@ -12,9 +13,7 @@ export const initialState = {
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART: {
-      console.log("jopla");
       let newItem = action.payload;
-      console.log(newItem);
 
       let itemInCart = state.cart.find((item) => item.id === newItem.id);
 
@@ -30,6 +29,30 @@ export default function cartReducer(state = initialState, action) {
         : {
             ...state,
             cart: [...state.cart, { ...newItem, quantity: 1 }],
+          };
+    }
+    case ADD_MORE_TO_CART: {
+      let newItem = action.payload;
+
+      let itemInCart = state.cart.find((item) => item.id === newItem.id);
+
+      if (itemInCart) {
+        if (itemInCart.quantity + newItem.quantity > itemInCart.stock) {
+          // isFull = true;
+        }
+      }
+      return itemInCart
+        ? {
+            ...state,
+            cart: state.cart.map((item) =>
+              item.id === newItem.id
+                ? { ...item, quantity: item.quantity + newItem.quantity }
+                : item
+            ),
+          }
+        : {
+            ...state,
+            cart: [...state.cart, { ...newItem, quantity: newItem.quantity }],
           };
     }
     case REMOVE_ONE_FROM_CART: {

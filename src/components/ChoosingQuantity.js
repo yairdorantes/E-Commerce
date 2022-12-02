@@ -5,18 +5,19 @@ import "./styles/choose-quant.scss";
 const ChoosingQuantity = ({ stock, product }) => {
   const dispatch = useDispatch();
 
-  const [quantityChoosen, setQuantityChoosen] = useState(1);
+  const [quantityChoosen, setQuantityChoosen] = useState(product.quantity);
 
   const IncreaseQuantity = () => {
-    quantityChoosen < stock && setQuantityChoosen(quantityChoosen + 1);
-    product && dispatch(addToCart(product));
+    if (quantityChoosen < stock) {
+      setQuantityChoosen(quantityChoosen + 1);
+      product && dispatch(addToCart(product));
+    }
   };
   const reduceQuantity = (e) => {
     if (quantityChoosen > 1) {
       setQuantityChoosen(quantityChoosen - 1);
-    } else {
+      product && dispatch(delFromCart(product.id));
     }
-    product && dispatch(delFromCart(product.id));
   };
 
   return (
