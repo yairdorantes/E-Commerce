@@ -9,7 +9,7 @@ import { addMoreToCart, addToCart } from "../actions/shoppingActions";
 import ChoosingQuantity from "./ChoosingQuantity";
 
 const productGet = {
-  id: 1,
+  id: 2,
   price: 1.99,
   description:
     "Mountain bike Kugel Di-Max R29 21v frenos de disco mecánico cambios Shimano Tourney TZ color gris con pie de apoyo",
@@ -36,6 +36,7 @@ Toque moderno Elegante
 Cómodo y fácil de sostener
 
 Tinta de color: Negro`,
+  section: "tech",
 };
 const productOpinions = [
   {

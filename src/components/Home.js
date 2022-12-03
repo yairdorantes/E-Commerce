@@ -15,7 +15,7 @@ function Home() {
       <MostLovedProducts></MostLovedProducts>
       <Sections></Sections>
       <Footer></Footer>
-      <ContReducer></ContReducer>
+      {/* <ContReducer></ContReducer> */}
     </>
   );
 }

@@ -3,7 +3,12 @@ import carrito from "../media/cart.png";
 import userIcon from "../media/usuario.png";
 import searchIcon from "../media/search.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { handleVisibility } from "../actions/shoppingActions";
 const MenuDesktop = () => {
+  const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const { items } = state.shopping;
   return (
     <>
       <nav>
@@ -40,11 +45,15 @@ const MenuDesktop = () => {
               <img className="icon-menu-bar-desktop" src={userIcon} alt="" />
               <span>Yair master</span>
             </div>
-            <Link to="/cart/">
-              <div>
-                <img className="icon-menu-bar-desktop" src={carrito} alt="" />
-              </div>
-            </Link>
+
+            <div
+              onClick={() => {
+                dispatch(handleVisibility());
+              }}
+            >
+              <div className="num-items-in-cart">{items}</div>
+              <img className="icon-menu-bar-desktop" src={carrito} alt="" />
+            </div>
           </div>
         </div>
       </nav>
