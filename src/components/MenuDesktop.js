@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import carrito from "../media/cart.png";
 import userIcon from "../media/usuario.png";
 import searchIcon from "../media/search.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { handleVisibility } from "../actions/shoppingActions";
+import AuthContext from "../context/AuthContext";
 const MenuDesktop = () => {
+  let { user, logoutUser } = useContext(AuthContext);
+  console.log(user);
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { items } = state.shopping;
@@ -43,7 +46,9 @@ const MenuDesktop = () => {
             />
             <div>
               <img className="icon-menu-bar-desktop" src={userIcon} alt="" />
-              <span>Yair master</span>
+              <span>
+                {user.user.name} {user.user.lastname}
+              </span>
             </div>
 
             <div

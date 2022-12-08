@@ -13,7 +13,7 @@ export const initialState = {
   message: "Full cart",
   total: 0,
   items: 0,
-  visible: true,
+  visible: false,
   cart: [],
 };
 
@@ -109,7 +109,6 @@ export default function cartReducer(state = initialState, action) {
 
     case HANDLE_VISIBILITY:
       state.visible ? (state.visible = false) : (state.visible = true);
-      console.log(state.visible);
       return { ...state, cart: [...state.cart] };
 
     default:

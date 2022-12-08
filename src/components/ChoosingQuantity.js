@@ -9,19 +9,20 @@ import {
 import "./styles/choose-quant.scss";
 const ChoosingQuantity = ({ stock, product }) => {
   const dispatch = useDispatch();
+  console.log(product.quantity);
 
   const [quantityChoosen, setQuantityChoosen] = useState(product.quantity);
 
   const IncreaseQuantity = () => {
-    if (quantityChoosen < stock) {
+    if (product.quantity < stock) {
       setQuantityChoosen(quantityChoosen + 1);
       product && dispatch(addToCart(product));
     }
     dispatch(getTotal());
     dispatch(numItems());
   };
-  const reduceQuantity = (e) => {
-    if (quantityChoosen > 1) {
+  const reduceQuantity = () => {
+    if (product.quantity > 1) {
       setQuantityChoosen(quantityChoosen - 1);
       product && dispatch(delFromCart(product.id));
     }
@@ -37,7 +38,8 @@ const ChoosingQuantity = ({ stock, product }) => {
             -
           </button>
           <div className="quantity-choosen">
-            <strong>{quantityChoosen}</strong>
+            {/* <strong>{quantityChoosen}</strong> */}
+            <strong>{product.quantity}</strong>
           </div>
           <button
             // style={{ filter: "brightness(63%)" }}

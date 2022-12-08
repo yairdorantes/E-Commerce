@@ -26,7 +26,6 @@ const ShoppingCart = () => {
   const state = useSelector((state) => state);
   const dispatch = useDispatch();
   const { cart, total, visible } = state.shopping;
-  console.log(visible);
 
   useEffect(() => {
     dispatch(getTotal());
@@ -39,7 +38,6 @@ const ShoppingCart = () => {
         ariaHideApp={false}
         style={customStyles}
         isOpen={visible}
-        // contentLabel="Minimal Modal Example"
       ></Modal>
       <OutsideClickHandler
         onOutsideClick={() => {
@@ -91,7 +89,7 @@ const ShoppingCart = () => {
                         </div>
                       </div>
                     </div>
-                    <hr />
+                    <hr className="separate-product-cart" />
                   </div>
                 );
               })
@@ -99,7 +97,14 @@ const ShoppingCart = () => {
               <div>Tu carrito está vacío</div>
             )}
           </div>
-          <div className="total-cart">Total ${total}</div>
+
+          <div className="total-cart">
+            <hr />
+            <div className="total-text">
+              <div>Total</div> <div>${total}</div>
+            </div>
+            <button className="css-button-3d--sky">Continuar compra</button>
+          </div>
         </div>
       </OutsideClickHandler>
     </>

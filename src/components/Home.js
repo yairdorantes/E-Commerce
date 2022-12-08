@@ -4,7 +4,6 @@ import MostLovedProducts from "../components/MostLovedProducts";
 import OffersSlider from "../components/OffersSlider";
 import Sections from "../components/Sections";
 import "../components/styles/menu-desktop.scss";
-import ContReducer from "./ContReducer";
 
 function Home() {
   return (

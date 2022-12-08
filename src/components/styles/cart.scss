@@ -11,12 +11,18 @@
   width: 450px;
   right: 0;
   top: 5px;
+
+  padding: 15px;
 }
-hr {
-  width: 380px;
+.separate-product-cart {
+  width: 100%;
   margin: auto;
+  border: none;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.567);
 }
 .container-cart-product {
+  width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -60,6 +66,46 @@ hr {
   }
 }
 .total-cart {
-  position: absolute;
-  bottom: 10px;
+  position: fixed;
+  width: 400px;
+  bottom: 15px;
+  .total-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+  hr {
+    margin: auto;
+    width: 100%;
+  }
+}
+
+.css-button-3d--sky {
+  min-width: 90%;
+  margin-left: 8.5%;
+
+  height: 40px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background: #3a86ff;
+  box-shadow: 0 5px #4433ff;
+}
+.css-button-3d--sky:hover {
+  box-shadow: 0 3px #4433ff;
+  top: 1px;
+}
+.css-button-3d--sky:active {
+  box-shadow: 0 0 #4433ff;
+  top: 5px;
 }
