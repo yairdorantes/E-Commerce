@@ -1,34 +1,29 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import {
-  addToCart,
-  delFromCart,
-  getTotal,
-  numItems,
-} from "../actions/shoppingActions";
-import "./styles/choose-quant.scss";
-const ChoosingQuantity = ({ stock, product }) => {
-  const dispatch = useDispatch();
-  console.log(product.quantity);
+import { useContext, useState, useEffect } from "react";
+import CartContext from "../context/CartContext";
 
+import "./styles/choose-quant.scss";
+const ChoosingQuantity = ({ product }) => {
+  let { handleQuantity } = useContext(CartContext);
   const [quantityChoosen, setQuantityChoosen] = useState(product.quantity);
 
   const IncreaseQuantity = () => {
-    if (product.quantity < stock) {
+    if (quantityChoosen < product.stock) {
       setQuantityChoosen(quantityChoosen + 1);
-      product && dispatch(addToCart(product));
     }
-    dispatch(getTotal());
-    dispatch(numItems());
   };
   const reduceQuantity = () => {
-    if (product.quantity > 1) {
+    if (quantityChoosen > 1) {
       setQuantityChoosen(quantityChoosen - 1);
-      product && dispatch(delFromCart(product.id));
     }
-    dispatch(getTotal());
-    dispatch(numItems());
   };
+  const handleChangeInput = (e) => {
+    setQuantityChoosen(parseInt(e.target.value));
+  };
+  useEffect(() => {
+    if (quantityChoosen <= product.stock && quantityChoosen > 0) {
+      handleQuantity(product, quantityChoosen);
+    }
+  }, [quantityChoosen]);
 
   return (
     <>
@@ -37,10 +32,15 @@ const ChoosingQuantity = ({ stock, product }) => {
           <button onClick={reduceQuantity} className="btn-quantity">
             -
           </button>
-          <div className="quantity-choosen">
-            {/* <strong>{quantityChoosen}</strong> */}
-            <strong>{product.quantity}</strong>
-          </div>
+          <input
+            type="number"
+            step="1"
+            min="1"
+            className="input-items-cart"
+            value={quantityChoosen}
+            // onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+            onChange={handleChangeInput}
+          />
           <button
             // style={{ filter: "brightness(63%)" }}
             onClick={IncreaseQuantity}
@@ -49,7 +49,11 @@ const ChoosingQuantity = ({ stock, product }) => {
             +
           </button>
         </div>
-        <div className="stock-info">{`(${stock} disponibles)`}</div>
+        {quantityChoosen > product.stock ? (
+          <div className="over-purchase">Supera las unidades disponibles</div>
+        ) : (
+          <div className="stock-info">{`(${product.stock} disponibles)`}</div>
+        )}
       </div>
     </>
   );

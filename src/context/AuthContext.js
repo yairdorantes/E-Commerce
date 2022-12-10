@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import { vars } from "../components/variables";
 import jwt_decode from "jwt-decode";
@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }) => {
         if (res.token) {
           setAuthToken(res.token);
           setUser(jwt_decode(res.token));
-          console.log(jwt_decode(res.token));
           localStorage.setItem("authTokenCommerce", JSON.stringify(res.token));
+          console.log("si paso aqui");
           navigate("/home");
         } else {
           console.log(res.token);

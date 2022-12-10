@@ -2,15 +2,14 @@ import "./styles/product-view.scss";
 import img1 from "../media/p1.jpg";
 import img2 from "../media/p2.jpg";
 import img3 from "../media/p3.jpg";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import GenerateStars from "./GenerateStars";
-import { useDispatch } from "react-redux";
-import { addMoreToCart, addToCart } from "../actions/shoppingActions";
-import ChoosingQuantity from "./ChoosingQuantity";
+
+import CartContext from "../context/CartContext";
 
 const productGet = {
   id: 2,
-  price: 1.99,
+  price: 1,
   description:
     "Mountain bike Kugel Di-Max R29 21v frenos de disco mecánico cambios Shimano Tourney TZ color gris con pie de apoyo",
   main_image: img1,
@@ -70,7 +69,7 @@ const productOpinions = [
 ];
 
 const ProductView = () => {
-  const dispatch = useDispatch();
+  let { addToCart } = useContext(CartContext);
 
   const [product] = useState(productGet);
   const [imgSrc, setImgSrc] = useState(product.main_image);
@@ -170,14 +169,7 @@ const ProductView = () => {
           <div className="container-buttons-buy-add">
             <button className="btn-buy-now">Comprar Ahora</button>
             <button
-              onClick={() => {
-                dispatch(
-                  addMoreToCart({
-                    ...product,
-                    quantity: quantityChoosen,
-                  })
-                );
-              }}
+              onClick={() => addToCart(product, quantityChoosen)}
               className="btn-add-cart"
             >
               Agregar al carrito

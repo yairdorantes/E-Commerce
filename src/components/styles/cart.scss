@@ -1,111 +1,33 @@
-.titles-cart {
-  display: flex;
-  justify-content: space-around;
-}
 .container-cart {
-  position: fixed;
-  z-index: 2000;
-  transition: 0.9s ease-in-out;
-  background-color: #010101f2;
-  height: 100%;
-  width: 450px;
+  background-color: rgb(0, 0, 0);
+  height: 100vh;
+  position: absolute;
+  width: 440px;
   right: 0;
-  top: 5px;
-
-  padding: 15px;
-}
-.separate-product-cart {
-  width: 100%;
-  margin: auto;
-  border: none;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.567);
-}
-.container-cart-product {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 40px;
-
-  .container-img-data-product {
-    cursor: pointer;
-    display: flex;
-    gap: 20px;
-    img {
-      width: 100px;
-      height: 100px;
-    }
-    .del-all-product {
-      width: 100px;
-      height: 50px;
-      color: #2f91e5;
-      text-align: center;
-    }
-
-    .name-product-in-cart {
-      white-space: nowrap;
-      width: 250px;
-
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-  }
-  .total-of-product-cart {
-    font-size: 23px;
-    font-weight: 400;
-    // margin-top: -20px;
-  }
-  .container-extra-info {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  .total-of-product-cart {
-    margin-top: 10px;
-  }
-}
-.total-cart {
-  position: fixed;
-  width: 400px;
-  bottom: 15px;
-  .total-text {
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
-  hr {
-    margin: auto;
-    width: 100%;
-  }
+  // transition: 1s ease-in-out;
+  animation: slideSide 1s ease-in-out;
 }
 
-.css-button-3d--sky {
-  min-width: 90%;
-  margin-left: 8.5%;
-
-  height: 40px;
-  color: #fff;
-  padding: 5px 10px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  display: inline-block;
-  outline: none;
-  border-radius: 5px;
-  border: none;
-  background: #3a86ff;
-  box-shadow: 0 5px #4433ff;
+.cart-show {
+  animation: slideSide 0.8s ease-in-out;
 }
-.css-button-3d--sky:hover {
-  box-shadow: 0 3px #4433ff;
-  top: 1px;
+.cart-hide {
+  animation: slideSide2 0.35s ease-in-out;
+  right: -500px;
 }
-.css-button-3d--sky:active {
-  box-shadow: 0 0 #4433ff;
-  top: 5px;
+@keyframes slideSide {
+  from {
+    right: -500px;
+  }
+  to {
+    right: 0;
+  }
+}
+@keyframes slideSide2 {
+  from {
+    right: 0;
+  }
+  to {
+    right: -500px;
+  }
 }

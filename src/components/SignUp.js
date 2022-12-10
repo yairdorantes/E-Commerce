@@ -7,7 +7,7 @@ import eyes from "../media/eye2.png";
 import closeye from "../media/eyeclose.png";
 // import env from "react-dotenv";
 import { vars } from "./variables";
-let url = `${vars.mySite}users`;
+let url = `${vars.mySite}signup`;
 const initialForm = {
   name: "",
   mail: "",
@@ -41,6 +41,7 @@ const SignUp = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name || !form.mail || !form.password) {
@@ -51,7 +52,7 @@ const SignUp = () => {
         alert("Elige un nombre menor a 14 caracteres");
         return;
       }
-      navigate("/home");
+      // navigate("/home");
     }
     createData(form);
 

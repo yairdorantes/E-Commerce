@@ -1,35 +1,28 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  delFromCart,
-  getTotal,
-  handleVisibility,
-  numItems,
-} from "../actions/shoppingActions";
+
 import ChoosingQuantity from "./ChoosingQuantity";
 import "./styles/cart.scss";
 import OutsideClickHandler from "react-outside-click-handler";
 import Modal from "react-modal";
+import CartContext from "../context/CartContext";
 const customStyles = {
   content: {
-    // color: "white",
     transition: "1s ease-out",
     width: "350px",
     height: "350px",
     backgroundColor: "#00000000",
     outline: "none",
   },
-  overlay: { zIndex: 1999, backgroundColor: "#18191ab1" },
+  overlay: { zIndex: 1999, backgroundColor: "#000000a0" },
 };
 const ShoppingCart = () => {
-  const state = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const { cart, total, visible } = state.shopping;
+  let { cartItems, isActive, handleVisibility, cleanCart, total } =
+    useContext(CartContext);
 
   useEffect(() => {
-    dispatch(getTotal());
-  }, []);
+    console.log(total);
+  }, [total]);
 
   return (
     <>
@@ -37,76 +30,36 @@ const ShoppingCart = () => {
         className="modal"
         ariaHideApp={false}
         style={customStyles}
-        isOpen={visible}
-      ></Modal>
-      <OutsideClickHandler
-        onOutsideClick={() => {
-          visible && dispatch(handleVisibility());
-        }}
+        isOpen={isActive}
+        closeTimeoutMS={400}
       >
-        <div
-          className="container-cart"
-          style={{ right: visible ? "0px" : "-600px" }}
-        >
-          <div className="container-cart-products">
-            {cart.length > 0 ? (
-              cart.map((product, key) => {
+        <OutsideClickHandler onOutsideClick={handleVisibility}>
+          <div
+            className={
+              isActive ? "container-cart cart-show" : "container-cart cart-hide"
+            }
+          >
+            <button onClick={handleVisibility}>jajaajaj</button>
+            {cartItems ? (
+              cartItems.map((item, key) => {
+                // console.log("si hay");
                 return (
                   <div key={key}>
-                    <div className="container-cart-product">
-                      <div className="container-img-data-product">
-                        <div>
-                          <Link to={`/${product.section}/${product.id}`}>
-                            <img src={product.main_image} alt="" />
-                          </Link>
-                          <div
-                            onClick={() =>
-                              dispatch(delFromCart(product.id, true))
-                            }
-                            className="del-all-product"
-                          >
-                            Eliminar
-                          </div>
-                        </div>
-                        <div className="container-info-aside-image">
-                          <Link
-                            style={{ color: "white", textDecoration: "none" }}
-                            to={`/${product.section}/${product.id}`}
-                          >
-                            <div className="name-product-in-cart">
-                              {product.description}
-                            </div>
-                          </Link>
-                          <div className="container-extra-info">
-                            <ChoosingQuantity
-                              stock={product.stock}
-                              product={product}
-                            />
-                            <div className="total-of-product-cart">
-                              ${product.price * product.quantity}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <hr className="separate-product-cart" />
+                    <div>{item.description}</div>
+                    <ChoosingQuantity product={item} />
                   </div>
                 );
               })
             ) : (
-              <div>Tu carrito está vacío</div>
+              <div>No items</div>
             )}
+            <button onClick={cleanCart}>clean</button>
+            <div>total:{total}</div>
+            <button onClick={() => console.log(cartItems)}>get</button>
           </div>
-
-          <div className="total-cart">
-            <hr />
-            <div className="total-text">
-              <div>Total</div> <div>${total}</div>
-            </div>
-            <button className="css-button-3d--sky">Continuar compra</button>
-          </div>
-        </div>
-      </OutsideClickHandler>
+          {/* <div className="cart">{cartItems}</div> */}
+        </OutsideClickHandler>
+      </Modal>
     </>
   );
 };

@@ -1,5 +1,16 @@
 .choose-quantity {
   //   margin-top: 60px;
+  // background-color: #2b3232;
+  width: 160px;
+}
+.btns-quantity {
+  display: flex;
+  gap: 2px;
+  justify-content: center;
+  // width: 150px;
+}
+.container-selectors-quantity {
+  margin: auto;
 }
 .btn-quantity {
   background-color: transparent;
@@ -25,7 +36,27 @@
   margin-top: 5px;
   font-size: 13px;
 }
-.btns-quantity {
-  display: flex;
-  gap: 2px;
+
+.input-items-cart {
+  width: 50px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+  border: 2.5px solid #52dbca;
+  color: white;
+  text-align: center;
+  &::-webkit-inner-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+  &:focus {
+    outline-width: 0;
+  }
+}
+
+.over-purchase {
+  color: red;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 13px;
 }
