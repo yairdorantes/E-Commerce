@@ -8,30 +8,35 @@ import { Link } from "react-router-dom";
 
 const sections = [
   {
+    id: 1,
     title: "Gifts",
     img: gift,
     txt: "",
     discount: 30,
   },
   {
+    id: 1,
     title: "Food",
     img: food,
     txt: "",
     discount: 10,
   },
   {
+    id: 1,
     title: "Tech",
     img: tech,
     txt: "",
     discount: 60,
   },
   {
+    id: 2,
     title: "Pape",
     img: pape,
     txt: "",
     discount: 40,
   },
   {
+    id: 2,
     title: "Home",
     img: homes,
     txt: "",
@@ -47,7 +52,7 @@ const Sections = () => {
           return (
             <Link
               className="link-from-section"
-              to={`/products/${section.title.toLowerCase()}`}
+              to={`/products/${section.title.toLowerCase()}/${section.id}`}
               key={index}
             >
               <div className="section-product">

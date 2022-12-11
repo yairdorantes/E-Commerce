@@ -8,21 +8,50 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const user = jwt_decode(localStorage.getItem("authTokenCommerce"));
+  // console.log(user);
+  let urlGetCart = `${vars.mySite}cart/${user.user.id}`;
+  let urlUpdateCart = `${vars.mySite}updateCart/${user.user.id}`;
 
-  let urlGetCart = `${vars.mySite}/cart/${user.user.id}`;
   const [cartItems, setCartItems] = useState([]);
   const [isActive, setIsActive] = useState(false);
   const [total, setTotal] = useState(0);
-  const getCart = () => {
-    return helpHttp(urlGetCart)
-      .get()
+  const [isLoading, setIsLoading] = useState(false);
+  const [clean, setClean] = useState(false);
+  const getCart = async () => {
+    setIsLoading(true);
+
+    await helpHttp()
+      .get(urlGetCart)
       .then((res) => {
-        console.log(res);
-        // setCartItems();
+        setCartItems(res[0].data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+
+  useEffect(() => {
+    getCart();
+  }, []);
+
+  const updateCartApi = () => {
+    const data = cartItems;
+
+    if (data.length > 0 || clean) {
+      let options = {
+        body: {
+          data,
+        },
+        headers: { "content-type": "application/json" },
+      };
+      helpHttp()
+        .post(urlUpdateCart, options)
+        .then((res) => {
+          // console.log(res);
+          setClean(false);
+        });
+    }
   };
 
   const handleQuantity = (item, quantity) => {
@@ -38,6 +67,7 @@ export const CartProvider = ({ children }) => {
   };
   const cleanCart = () => {
     setCartItems([]);
+    setClean(true);
   };
 
   const addToCart = (item, quantity) => {
@@ -61,6 +91,7 @@ export const CartProvider = ({ children }) => {
       cost += cartItem.quantity * cartItem.price;
     });
     setTotal(cost);
+    updateCartApi();
   }, [cartItems]);
 
   const handleVisibility = () => {
@@ -75,12 +106,13 @@ export const CartProvider = ({ children }) => {
     handleVisibility,
     handleQuantity,
     cleanCart,
+    isLoading,
   };
 
-  useEffect(() => {
-    // getCart()
-    console.log(total);
-  }, [total]);
+  // useEffect(() => {
+  //   // getCart()
+  //   console.log(total);
+  // }, [total]);
 
   return (
     <CartContext.Provider value={contextData}>{children}</CartContext.Provider>

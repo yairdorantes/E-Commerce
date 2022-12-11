@@ -6,6 +6,8 @@ import "./styles/cart.scss";
 import OutsideClickHandler from "react-outside-click-handler";
 import Modal from "react-modal";
 import CartContext from "../context/CartContext";
+import cruz from "../media/cruz.png";
+import arrowLeft from "../media/leftArrow.png";
 const customStyles = {
   content: {
     transition: "1s ease-out",
@@ -17,13 +19,14 @@ const customStyles = {
   overlay: { zIndex: 1999, backgroundColor: "#000000a0" },
 };
 const ShoppingCart = () => {
-  let { cartItems, isActive, handleVisibility, cleanCart, total } =
+  let { cartItems, isActive, handleVisibility, cleanCart, total, isLoading } =
     useContext(CartContext);
 
   useEffect(() => {
-    console.log(total);
-  }, [total]);
-
+    isActive
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "auto");
+  }, [isActive]);
   return (
     <>
       <Modal
@@ -39,25 +42,46 @@ const ShoppingCart = () => {
               isActive ? "container-cart cart-show" : "container-cart cart-hide"
             }
           >
-            <button onClick={handleVisibility}>jajaajaj</button>
-            {cartItems ? (
-              cartItems.map((item, key) => {
-                // console.log("si hay");
-                return (
-                  <div key={key}>
-                    <div>{item.description}</div>
-                    <ChoosingQuantity product={item} />
-                  </div>
-                );
-              })
-            ) : (
-              <div>No items</div>
-            )}
-            <button onClick={cleanCart}>clean</button>
-            <div>total:{total}</div>
-            <button onClick={() => console.log(cartItems)}>get</button>
+            <button className="arrow-left" onClick={handleVisibility}>
+              <img src={arrowLeft} alt="" />
+            </button>
+            <div className="container-items-cart">
+              {cartItems ? (
+                cartItems.map((item, key) => {
+                  return (
+                    <div key={key} className="container-cart-item">
+                      <div className="container-img-text-item">
+                        <div className="container-img">
+                          <img src={item.main_image} alt="" />
+                        </div>
+                        <div className="container-price-descrip">
+                          <p>{item.description}</p>
+                          <div className="price-item">
+                            ${item.quantity * item.price}
+                          </div>
+                        </div>
+                        <div onClick={cleanCart} className="cross-out">
+                          <img src={cruz} alt="" />
+                        </div>
+                        <div className="container-quantity">
+                          <ChoosingQuantity product={item} />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div>No items</div>
+              )}
+            </div>
+            <div className="container-total">
+              <div className="container-texts">
+                <div>Subtotal</div>
+                <div>${total}</div>
+              </div>
+            </div>
+            {/* {isLoading ? <div>cargndo</div> : <div>no cargado</div>} */}
           </div>
-          {/* <div className="cart">{cartItems}</div> */}
         </OutsideClickHandler>
       </Modal>
     </>

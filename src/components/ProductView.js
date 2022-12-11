@@ -9,9 +9,9 @@ import CartContext from "../context/CartContext";
 
 const productGet = {
   id: 2,
-  price: 1,
+  price: 1.99,
   description:
-    "Mountain bike Kugel Di-Max R29 21v frenos de disco mecánico cambios Shimano Tourney TZ color gris con pie de apoyo",
+    "Short description Pc Gamer with another text for test kjias jsg hgsuyg us uyguyg ug uguyguyg uy",
   main_image: img1,
   extra_images: [img2, img3],
   sales: 12,
@@ -87,6 +87,22 @@ const ProductView = () => {
   };
   const decrement = () => {
     quantityChoosen > 1 && setQuantity(quantityChoosen - 1);
+  };
+  const sendItem = (product) => {
+    const keys = [
+      "id",
+      "stock",
+      "price",
+      "quantity",
+      "main_image",
+      "description",
+    ];
+    const entries = Object.entries(product).filter(([key]) =>
+      keys.includes(key)
+    );
+    const newObject = Object.fromEntries(entries);
+
+    addToCart(newObject, quantityChoosen);
   };
 
   return (
@@ -169,7 +185,9 @@ const ProductView = () => {
           <div className="container-buttons-buy-add">
             <button className="btn-buy-now">Comprar Ahora</button>
             <button
-              onClick={() => addToCart(product, quantityChoosen)}
+              onClick={() => {
+                sendItem(product);
+              }}
               className="btn-add-cart"
             >
               Agregar al carrito

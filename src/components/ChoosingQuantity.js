@@ -33,6 +33,12 @@ const ChoosingQuantity = ({ product }) => {
             -
           </button>
           <input
+            style={{
+              color:
+                quantityChoosen > product.stock || quantityChoosen === 0
+                  ? "red"
+                  : "white",
+            }}
             type="number"
             step="1"
             min="1"
@@ -49,11 +55,8 @@ const ChoosingQuantity = ({ product }) => {
             +
           </button>
         </div>
-        {quantityChoosen > product.stock ? (
-          <div className="over-purchase">Supera las unidades disponibles</div>
-        ) : (
-          <div className="stock-info">{`(${product.stock} disponibles)`}</div>
-        )}
+
+        <div className="stock-info">{`(${product.stock} disponibles)`}</div>
       </div>
     </>
   );
