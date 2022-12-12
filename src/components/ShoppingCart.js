@@ -19,9 +19,15 @@ const customStyles = {
   overlay: { zIndex: 1999, backgroundColor: "#000000a0" },
 };
 const ShoppingCart = () => {
-  let { cartItems, isActive, handleVisibility, cleanCart, total, isLoading } =
-    useContext(CartContext);
-
+  let {
+    cartItems,
+    isActive,
+    handleVisibility,
+    cleanCart,
+    total,
+    deleteItem,
+    isLoading,
+  } = useContext(CartContext);
   useEffect(() => {
     isActive
       ? (document.body.style.overflow = "hidden")
@@ -46,7 +52,7 @@ const ShoppingCart = () => {
               <img src={arrowLeft} alt="" />
             </button>
             <div className="container-items-cart">
-              {cartItems ? (
+              {cartItems.length > 0 ? (
                 cartItems.map((item, key) => {
                   return (
                     <div key={key} className="container-cart-item">
@@ -60,7 +66,10 @@ const ShoppingCart = () => {
                             ${item.quantity * item.price}
                           </div>
                         </div>
-                        <div onClick={cleanCart} className="cross-out">
+                        <div
+                          onClick={() => deleteItem(item.id)}
+                          className="cross-out"
+                        >
                           <img src={cruz} alt="" />
                         </div>
                         <div className="container-quantity">

@@ -12,48 +12,35 @@ import { useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import { useEffect } from "react";
 
-// const products = [
-//   {
-//     id: 1,
-//     description: "Description of product 1 with another description",
-//     price: 1.12,
-//     img: p1,
-//   },
-//   {
-//     id: 2,
-
-//     description: "Description of product 2 when you are camping like boon",
-//     price: 144.89,
-//     img: p2,
-//     discount: 2,
-//   },
-//   {
-//     id: 38,
-
-//     description: "Description of product 3",
-//     price: 499.99,
-//     img: p3,
-//     discount: 10,
-//   },
-// ];
-
 const ProductList = () => {
   const paramsUrl = useParams();
-  const [amount, setAmount] = useState(1);
+  const [amount, setAmount] = useState(2);
   const [skip, setSkip] = useState(0);
   const [products, setProducts] = useState([]);
+  const [pagination, setPagination] = useState(0);
+  const [indexPage, setIndexPage] = useState(1);
   const getProducts = () => {
     const urlGetProducts = `${vars.mySite}products-list/${skip}/${amount}/${paramsUrl.id}`;
     helpHttp()
       .get(urlGetProducts)
       .then((response) => {
-        setProducts(response);
+        setProducts(response.products);
+        setPagination(Math.ceil(response.count / amount));
       });
   };
   useEffect(() => {
     getProducts();
-    console.log(products);
-  }, [amount]);
+  }, [skip]);
+
+  const handlePagination = (direction) => {
+    if (direction) {
+      setSkip(skip + amount);
+      setIndexPage(indexPage + 1);
+    } else {
+      setSkip(skip - amount);
+      setIndexPage(indexPage - 1);
+    }
+  };
 
   return (
     <>
@@ -66,12 +53,17 @@ const ProductList = () => {
                   <div
                     className="container-img-product"
                     style={{
-                      backgroundImage: "url(" + product.img + ")",
+                      backgroundImage: "url(" + product.main_image + ")",
                     }}
                   ></div>
                 </Link>
                 <div className="myheart">
-                  <Heart emptyHeart={emptyHeart} heart={heart} active={false} />
+                  <Heart
+                    emptyHeart={emptyHeart}
+                    heart={heart}
+                    active={false}
+                    id={product.id}
+                  />
                 </div>
                 <div className="container-info-price">
                   <Link
@@ -99,15 +91,27 @@ const ProductList = () => {
             );
           })}
       </div>
-      <div
-        onClick={() => {
-          setAmount(amount + 5);
-          // setSkip(5);
-          console.log(products);
-        }}
-      >
-        load more
+      {indexPage > 1 && (
+        <div
+          onClick={() => {
+            handlePagination(false);
+          }}
+        >
+          ˂ back
+        </div>
+      )}
+      <div>
+        {indexPage} de {pagination}
       </div>
+      {indexPage < pagination && (
+        <div
+          onClick={() => {
+            handlePagination(true);
+          }}
+        >
+          next ˃
+        </div>
+      )}
     </>
   );
 };

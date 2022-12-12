@@ -65,6 +65,13 @@ export const CartProvider = ({ children }) => {
       );
     }
   };
+
+  const deleteItem = (item) => {
+    const updatedCart = cartItems.filter((cartItem) => cartItem.id !== item);
+    setCartItems(updatedCart);
+    setClean(true);
+  };
+
   const cleanCart = () => {
     setCartItems([]);
     setClean(true);
@@ -86,11 +93,17 @@ export const CartProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    let cost = 0;
-    cartItems.forEach((cartItem) => {
-      cost += cartItem.quantity * cartItem.price;
-    });
-    setTotal(cost);
+    if (cartItems.length > 0) {
+      let cost = 0;
+      cartItems.forEach((cartItem) => {
+        cost += cartItem.quantity * cartItem.price;
+        // console.log(cartItem.quantity * cartItem.price);
+      });
+      cost = cost.toFixed(2);
+      setTotal(cost);
+    } else {
+      setTotal(0);
+    }
     updateCartApi();
   }, [cartItems]);
 
@@ -105,6 +118,7 @@ export const CartProvider = ({ children }) => {
     addToCart,
     handleVisibility,
     handleQuantity,
+    deleteItem,
     cleanCart,
     isLoading,
   };

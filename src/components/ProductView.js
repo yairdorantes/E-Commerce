@@ -4,80 +4,31 @@ import img2 from "../media/p2.jpg";
 import img3 from "../media/p3.jpg";
 import { useEffect, useState, useContext } from "react";
 import GenerateStars from "./GenerateStars";
-
 import CartContext from "../context/CartContext";
-
-const productGet = {
-  id: 2,
-  price: 1.99,
-  description:
-    "Short description Pc Gamer with another text for test kjias jsg hgsuyg us uyguyg ug uguyguyg uy",
-  main_image: img1,
-  extra_images: [img2, img3],
-  sales: 12,
-  rating: 4.5,
-  total_opinions: 10,
-  stock: 12,
-  product_details: `Hola a todos, hemos lanzado un nuevo estilo de bolígrafo de mampostería con colores más intensos. Creo que te gustará. A continuación se muestra el enlace, bienvenido a echar un vistazo:
-
-https://articulo.mercadolibre.com.mx/MLM-1414925476-boligrafo-con-diseno-de-diamante-recuerdo-15-anos-12-uds-_JM
-
-
-**12 Lapiceros Diamante Tornasol Pluma Recuerdo Regalo Xv Años
-
-Descripción
-BOLIGRAFO ELEGANTE CON FORMA DE DIAMANTE TORNASOL
-DESCRIPCION:
-Lápices con divertido adorno en forma de cristal para oficina, cubículo con estilo elegante.
-
-Toque moderno Elegante
-
-Cómodo y fácil de sostener
-
-Tinta de color: Negro`,
-  section: "tech",
-};
-const productOpinions = [
-  {
-    id: 1,
-    product_id: 1,
-    date: "23 abr 2022",
-    text: "hola bueno muy bueno jsjsjsj",
-    rating: 3,
-  },
-  {
-    id: 2,
-    product_id: 1,
-    date: "30 may 2022",
-    text: "excelente llego en buenas condiciones",
-    rating: 5,
-  },
-  {
-    id: 2,
-    product_id: 1,
-    date: "3 jul 2022",
-    text: "mala calidad inga tu mae xdxd jajajajajajaja jajaajajxd jajajajajajaja jajaajajxd jajajajajajaja jajaajajxd jajajajajajaja jajaajaj",
-    rating: 2,
-  },
-  {
-    id: 2,
-    product_id: 1,
-    date: "3 jul 2022",
-    text: "",
-    rating: 2,
-  },
-];
+import { helpHttp } from "../helpers/helpHttp";
+import { useParams } from "react-router-dom";
+import { vars } from "./variables";
 
 const ProductView = () => {
   let { addToCart } = useContext(CartContext);
-
-  const [product] = useState(productGet);
+  const paramsUrl = useParams();
+  const urlProduct = `${vars.mySite}product/${paramsUrl.id}`;
+  const [product, setProduct] = useState({});
   const [imgSrc, setImgSrc] = useState(product.main_image);
   const [stars] = useState(Math.floor(product.rating));
   const [stock, setStock] = useState(product.stock);
-  const [opinions, setOpinions] = useState(productOpinions);
   const [imgSelected, setImgSelected] = useState(0);
   const [quantityChoosen, setQuantity] = useState(1);
+
+  useEffect(() => {
+    helpHttp()
+      .get(urlProduct)
+      .then((res) => {
+        setProduct(res);
+        console.log(res);
+      });
+  }, []);
+
   const setImage = (e) => {
     setImgSrc(e.target.src);
     setImgSelected(e.target.id);
@@ -110,7 +61,7 @@ const ProductView = () => {
       <div className="container-product-view">
         <div className="container-imgs">
           <div className="container-main-img">
-            <img src={imgSrc} alt="" />
+            <img src={product.main_image} alt="" />
           </div>
           <div className="container-mini-images">
             <img
@@ -127,7 +78,7 @@ const ProductView = () => {
               onClick={setImage}
               alt=""
             />
-            {product.extra_images.map((image, id) => {
+            {/* {product.extra_images.map((image, id) => {
               return (
                 <img
                   style={{
@@ -147,7 +98,7 @@ const ProductView = () => {
                   alt=""
                 />
               );
-            })}
+            })} */}
           </div>
         </div>
         <div className="container-product-info-view">
@@ -198,7 +149,7 @@ const ProductView = () => {
           <div>Descripcion</div>
           <p>{product.product_details}</p>
         </div>
-        <div className="container-opinions">
+        {/* <div className="container-opinions">
           {opinions.map((opinion, key) => {
             return (
               <div key={key} className="opinion-box">
@@ -211,7 +162,7 @@ const ProductView = () => {
               </div>
             );
           })}
-        </div>
+        </div> */}
       </div>
     </>
   );
