@@ -50,7 +50,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("authTokenCommerce");
     navigate("/login");
   };
-
   const contextData = {
     user,
     loginUser,

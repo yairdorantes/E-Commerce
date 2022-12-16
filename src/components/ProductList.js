@@ -1,33 +1,45 @@
 import "./styles/products-list.scss";
-import p1 from "../media/pp1.jpg";
-import p2 from "../media/pp2.jpg";
-import p3 from "../media/pp3.jpg";
 import emptyHeart from "../media/emptyheart.png";
 import heart from "../media/heart.png";
 import Heart from "./Heart";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { vars } from "./variables";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import { useEffect } from "react";
-
+import AuthContext from "../context/AuthContext";
 const ProductList = () => {
+  const { user } = useContext(AuthContext);
   const paramsUrl = useParams();
   const [amount, setAmount] = useState(2);
   const [skip, setSkip] = useState(0);
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState(0);
   const [indexPage, setIndexPage] = useState(1);
+  const [userFavs, setUserFavs] = useState([]);
   const getProducts = () => {
     const urlGetProducts = `${vars.mySite}products-list/${skip}/${amount}/${paramsUrl.id}`;
     helpHttp()
       .get(urlGetProducts)
       .then((response) => {
+        // console.log(response);
         setProducts(response.products);
         setPagination(Math.ceil(response.count / amount));
       });
   };
+
+  useEffect(() => {
+    const getFavs = `${vars.mySite}favorites/${user.user.id}/true`;
+    // console.log(getFavs);
+    helpHttp()
+      .get(getFavs)
+      .then((res) => {
+        // console.log(res);
+        setUserFavs(res);
+      });
+  }, []);
+
   useEffect(() => {
     getProducts();
   }, [skip]);
@@ -61,7 +73,7 @@ const ProductList = () => {
                   <Heart
                     emptyHeart={emptyHeart}
                     heart={heart}
-                    active={false}
+                    active={userFavs.includes(product.id) ? true : false}
                     id={product.id}
                   />
                 </div>

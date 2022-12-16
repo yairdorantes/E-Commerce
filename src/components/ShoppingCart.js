@@ -57,9 +57,12 @@ const ShoppingCart = () => {
                   return (
                     <div key={key} className="container-cart-item">
                       <div className="container-img-text-item">
-                        <div className="container-img">
-                          <img src={item.main_image} alt="" />
-                        </div>
+                        <div
+                          className="container-img"
+                          style={{
+                            backgroundImage: "url(" + item.main_image + ")",
+                          }}
+                        ></div>
                         <div className="container-price-descrip">
                           <p>{item.description}</p>
                           <div className="price-item">

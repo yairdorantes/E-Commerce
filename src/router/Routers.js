@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import FavoritesPage from "../components/FavoritesPage";
 import Home from "../components/Home";
 import Login from "../components/Login";
 import ProductList from "../components/ProductList";
@@ -16,6 +17,7 @@ const Routers = () => {
       <Route path="/cart/" element={<ShoppingCart />}></Route>
       <Route path="/signup/" element={<SignUp />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/favorites" element={<FavoritesPage />}></Route>
     </Routes>
   );
 };

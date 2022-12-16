@@ -1,15 +1,22 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import carrito from "../media/cart.png";
 import userIcon from "../media/usuario.png";
 import searchIcon from "../media/search.png";
+import heart from "../media/heartMenu.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import AuthContext from "../context/AuthContext";
 import CartContext from "../context/CartContext";
+import FavoriteSmall from "./FavoriteSmall";
 const MenuDesktop = () => {
   let { user, logoutUser } = useContext(AuthContext);
   let { cartItems, handleVisibility } = useContext(CartContext);
+  const [showFavorites, setShowFavorites] = useState(false);
 
+  const handleShowFavorites = () => {
+    showFavorites ? setShowFavorites(false) : setShowFavorites(true);
+    console.log("desktop");
+  };
   return (
     <>
       <nav>
@@ -45,6 +52,18 @@ const MenuDesktop = () => {
             <div>
               <img className="icon-menu-bar-desktop" src={userIcon} alt="" />
               <span>{/* {user.user.name} {user.user.lastname} */}</span>
+            </div>
+            <div>
+              <img
+                onClick={handleShowFavorites}
+                className="icon-menu-bar-desktop"
+                src={heart}
+                alt=""
+              />
+              <FavoriteSmall
+                isActiveFavorites={showFavorites}
+                handleShow={handleShowFavorites}
+              />
             </div>
 
             <div onClick={handleVisibility}>

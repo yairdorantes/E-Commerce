@@ -1,0 +1,71 @@
+.container-favs-big {
+  margin: auto;
+  padding: 10px;
+  width: 600px;
+  height: 450px;
+  // border-radius: 10px;
+  margin-top: 100px;
+  position: relative;
+  .all-favs {
+    color: #2984e5;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -10%);
+  }
+  .container-mainBox-btn {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 10px;
+    .btn-del-favs {
+      cursor: pointer;
+      border-radius: 5px;
+      padding: 5px;
+    }
+  }
+  .check-fav {
+    width: 17px;
+  }
+}
+.container-fav-big {
+  //   font-size: 20px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  .container-image-fav-big {
+    width: 150px;
+    height: 150px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 7px;
+  }
+  .description-fav-big {
+    font-size: 18px;
+  }
+  .price-fav-big {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  .link-delete-fav-big {
+    color: #2984e5;
+    cursor: pointer;
+    // margin-top: 7px;
+  }
+}
+
+.container-data-fav-big {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.h-re-fav-big {
+  width: 100%;
+  margin: auto;
+  border: none;
+  height: 0.1px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.525);
+  // margin-top: 27px;
+  // position: absolute;
+}

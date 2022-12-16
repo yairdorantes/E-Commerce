@@ -1,0 +1,52 @@
+.modal-favs {
+  margin-top: 10px;
+  border-radius: 8px;
+  position: absolute;
+  top: 5%;
+  right: 10%;
+}
+.container-favs-small {
+  transition: 2s ease-in-out;
+  padding: 10px;
+  width: 100%;
+  height: 450px;
+  // border-radius: 10px;
+  position: relative;
+  .all-favs {
+    color: #2984e5;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -10%);
+  }
+}
+.container-fav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  .container-image-fav {
+    width: 110px;
+    height: 110px;
+    background-position: center;
+    background-size: cover;
+    border-image: 10px;
+  }
+  .price-fav {
+    font-weight: 500;
+  }
+  .link-delete-fav {
+    color: #2984e5;
+    cursor: pointer;
+  }
+}
+.h-re-fav {
+  width: 100%;
+  margin: auto;
+  border: none;
+  height: 0.1px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.525);
+  // margin-top: 27px;
+  // position: absolute;
+}
