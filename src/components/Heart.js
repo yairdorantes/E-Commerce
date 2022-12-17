@@ -4,14 +4,14 @@ import "./styles/heartstyles.scss";
 import { vars } from "./variables";
 import AuthContext from "../context/AuthContext";
 
-// http://localhost:4000/api/favorites/2
-const Heart = ({ emptyHeart, heart, active, id }) => {
+// http://localhost:4000/api/favorites/2S
+const Heart = ({ emptyHeart, heart, active, id, changingState, dos }) => {
   let { user } = useContext(AuthContext);
   const urlFav = `${vars.mySite}favorites/${user.user.id}`;
   const [heartActive, setHeartActive] = useState(false);
   useEffect(() => {
     active ? setHeartActive(true) : setHeartActive(false);
-  }, []);
+  }, [changingState]);
 
   const handleHeart = () => {
     if (heartActive) {

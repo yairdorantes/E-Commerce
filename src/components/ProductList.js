@@ -12,7 +12,7 @@ import AuthContext from "../context/AuthContext";
 const ProductList = () => {
   const { user } = useContext(AuthContext);
   const paramsUrl = useParams();
-  const [amount, setAmount] = useState(2);
+  const [amount, setAmount] = useState(3);
   const [skip, setSkip] = useState(0);
   const [products, setProducts] = useState([]);
   const [pagination, setPagination] = useState(0);
@@ -31,11 +31,9 @@ const ProductList = () => {
 
   useEffect(() => {
     const getFavs = `${vars.mySite}favorites/${user.user.id}/true`;
-    // console.log(getFavs);
     helpHttp()
       .get(getFavs)
       .then((res) => {
-        // console.log(res);
         setUserFavs(res);
       });
   }, []);
@@ -54,11 +52,22 @@ const ProductList = () => {
     }
   };
 
+  const handleHeart = (id) => {
+    console.log("aajajajaj");
+    if (userFavs.includes(id)) {
+      setUserFavs(userFavs.filter((fav) => fav !== id));
+    } else {
+      setUserFavs([...userFavs, id]);
+    }
+  };
+
   return (
     <>
       <div className="container-cards-products">
         {products &&
+          userFavs &&
           products.map((product, index) => {
+            // console.log(userFavs.includes(5));
             return (
               <div key={index} className="product-card">
                 <Link to={`/${paramsUrl.section}/${product.id}`}>
@@ -69,12 +78,17 @@ const ProductList = () => {
                     }}
                   ></div>
                 </Link>
-                <div className="myheart">
+                <div
+                  className="myheart"
+                  onClick={() => handleHeart(product.id)}
+                >
+                  {/* {console.log(userFavs.includes(product.id), "sisisis")} */}
                   <Heart
                     emptyHeart={emptyHeart}
                     heart={heart}
                     active={userFavs.includes(product.id) ? true : false}
                     id={product.id}
+                    changingState={products}
                   />
                 </div>
                 <div className="container-info-price">
@@ -103,27 +117,28 @@ const ProductList = () => {
             );
           })}
       </div>
-      {indexPage > 1 && (
+      <div className="container-pagination">
         <div
+          className={indexPage > 1 ? "" : "hidden-paginator"}
           onClick={() => {
             handlePagination(false);
           }}
         >
-          ˂ back
+          ˂ Anterior
         </div>
-      )}
-      <div>
-        {indexPage} de {pagination}
-      </div>
-      {indexPage < pagination && (
+
+        <div>
+          <strong>{indexPage}</strong> de {pagination}
+        </div>
         <div
+          className={indexPage < pagination ? "" : "hidden-paginator"}
           onClick={() => {
             handlePagination(true);
           }}
         >
-          next ˃
+          Siguiente ˃
         </div>
-      )}
+      </div>
     </>
   );
 };

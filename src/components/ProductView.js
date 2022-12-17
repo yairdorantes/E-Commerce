@@ -64,7 +64,21 @@ const ProductView = () => {
             <img src={product.main_image} alt="" />
           </div>
           <div className="container-mini-images">
-            <img
+            <div
+              id={0}
+              style={{
+                backgroundImage: "url(" + product.main_image + ")",
+                filter:
+                  imgSelected == 0 ? "brightness(100%)" : "brightness(80%)",
+                border:
+                  imgSelected == 0
+                    ? "3px solid #3483fa"
+                    : "3px solid rgba(0, 0, 0, 0)",
+              }}
+              className="container-main-image-product-view"
+              onClick={setImage}
+            ></div>
+            {/* <img
               id={0}
               src={product.main_image}
               style={{
@@ -77,7 +91,7 @@ const ProductView = () => {
               }}
               onClick={setImage}
               alt=""
-            />
+            /> */}
             {/* {product.extra_images.map((image, id) => {
               return (
                 <img
@@ -129,7 +143,7 @@ const ProductView = () => {
                     +
                   </button>
                 </div>
-                <div className="stock-info">{`(${stock} disponibles)`}</div>
+                <div className="stock-info">{`(${product.stock} disponibles)`}</div>
               </div>
             </div>
           </div>

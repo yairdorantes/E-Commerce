@@ -9,8 +9,8 @@
   position: relative;
   color: black;
   background-color: rgb(236, 225, 225);
-  height: 400px;
-  width: 280px;
+  height: 330px;
+  width: 250px;
   border-radius: 10px;
   hr {
     width: 85%;
@@ -54,7 +54,7 @@
   position: absolute;
   width: 85%;
   margin: 15px;
-  bottom: 0px;
+  bottom: -12px;
   .price-product-list {
     font-weight: 600;
     font-size: 19px;
@@ -81,4 +81,17 @@
 .link-from-one-product {
   text-decoration: none;
   color: black;
+}
+.container-pagination {
+  cursor: pointer;
+  display: flex;
+  gap: 40px;
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translate(-50%);
+}
+.hidden-paginator {
+  opacity: 0;
+  pointer-events: none;
 }
