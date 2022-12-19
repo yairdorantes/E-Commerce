@@ -11,11 +11,15 @@ import FavoriteSmall from "./FavoriteSmall";
 const MenuDesktop = () => {
   let { user, logoutUser } = useContext(AuthContext);
   let { cartItems, handleVisibility } = useContext(CartContext);
+  const [query, setQuery] = useState("");
   const [showFavorites, setShowFavorites] = useState(false);
 
   const handleShowFavorites = () => {
     showFavorites ? setShowFavorites(false) : setShowFavorites(true);
     console.log("desktop");
+  };
+  const handleQuerySearch = (e) => {
+    setQuery(e.target.value);
   };
   return (
     <>
@@ -39,13 +43,16 @@ const MenuDesktop = () => {
             My Ecommerce
           </div>
           <div className="container-extra-data flex">
-            <img
-              className="icon-menu-bar-desktop icon-search"
-              src={searchIcon}
-              alt=""
-            />
+            <Link to={`/search/${query}`}>
+              <img
+                className="icon-menu-bar-desktop icon-search"
+                src={searchIcon}
+                alt=""
+              />
+            </Link>
             <input
               placeholder="Search"
+              onChange={handleQuerySearch}
               type="text"
               className="input-search-menu"
             />

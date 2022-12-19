@@ -14,7 +14,6 @@
 }
 .container-products {
   display: flex;
-  grid-template-columns: repeat(auto-fill, 400px);
   justify-content: space-between;
   flex-wrap: wrap;
   text-align: center;

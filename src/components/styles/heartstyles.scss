@@ -1,5 +1,13 @@
 .heart-component {
-  width: 25px;
+  width: 24px;
+}
+.container-heart {
+  width: 40px;
+  // background-color: aqua;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .animationHeart {

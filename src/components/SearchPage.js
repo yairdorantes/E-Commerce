@@ -9,29 +9,22 @@ import { useContext, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import { useEffect } from "react";
 import AuthContext from "../context/AuthContext";
-const ProductList = ({ searchType }) => {
-  console.log({ searchType });
+const SearchPage = () => {
   const { user } = useContext(AuthContext);
   const paramsUrl = useParams();
-
-  const [amount, setAmount] = useState(8);
-  const [skip, setSkip] = useState(0);
   const [products, setProducts] = useState([]);
-  const [pagination, setPagination] = useState(0);
-  const [indexPage, setIndexPage] = useState(1);
   const [userFavs, setUserFavs] = useState([]);
+  //   const [amount, setAmount] = useState(8);
+  //   const [skip, setSkip] = useState(0);
   const getProducts = () => {
-    // http://localhost:4000/api/search/testing
-    const urlGetProducts = `${vars.mySite}products-list/${skip}/${amount}/${paramsUrl.id}`;
+    const urlGetProducts = `${vars.mySite}search/${paramsUrl.query}`;
+    console.log(urlGetProducts);
     helpHttp()
       .get(urlGetProducts)
       .then((response) => {
-        // console.log(response);
-        setProducts(response.products);
-        setPagination(Math.ceil(response.count / amount));
+        setProducts(response);
       });
   };
-
   useEffect(() => {
     const getFavs = `${vars.mySite}favorites/${user.user.id}/true`;
     helpHttp()
@@ -39,21 +32,11 @@ const ProductList = ({ searchType }) => {
       .then((res) => {
         setUserFavs(res);
       });
-  }, []);
+  }, [paramsUrl]);
 
   useEffect(() => {
     getProducts();
-  }, [skip]);
-
-  const handlePagination = (direction) => {
-    if (direction) {
-      setSkip(skip + amount);
-      setIndexPage(indexPage + 1);
-    } else {
-      setSkip(skip - amount);
-      setIndexPage(indexPage - 1);
-    }
-  };
+  }, [paramsUrl]);
 
   const handleHeart = (id) => {
     if (userFavs.includes(id)) {
@@ -66,8 +49,7 @@ const ProductList = ({ searchType }) => {
   return (
     <>
       <div className="container-cards-products">
-        {products &&
-          userFavs &&
+        {products.length > 0 ? (
           products.map((product, index) => {
             return (
               <div key={index} className="product-card">
@@ -96,7 +78,7 @@ const ProductList = ({ searchType }) => {
                 <div className="container-info-price">
                   <Link
                     className="link-from-one-product"
-                    to={`/${paramsUrl.section}/${product.id}`}
+                    to={`/+/${product.id}`}
                   >
                     <div className="container-info-product">
                       {/* <h2>{product.title}</h2> */}
@@ -117,32 +99,16 @@ const ProductList = ({ searchType }) => {
                 </div>
               </div>
             );
-          })}
-      </div>
-      <div className="container-pagination">
-        <div
-          className={indexPage > 1 ? "" : "hidden-paginator"}
-          onClick={() => {
-            handlePagination(false);
-          }}
-        >
-          ˂ Anterior
-        </div>
-
-        <div>
-          <strong>{indexPage}</strong> de {pagination}
-        </div>
-        <div
-          className={indexPage < pagination ? "" : "hidden-paginator"}
-          onClick={() => {
-            handlePagination(true);
-          }}
-        >
-          Siguiente ˃
-        </div>
+          })
+        ) : (
+          <div className="search-message">
+            No se encontraron productos relacionados a:{" "}
+            <span className="query-message">{paramsUrl.query}</span>
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default ProductList;
+export default SearchPage;

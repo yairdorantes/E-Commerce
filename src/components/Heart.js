@@ -14,6 +14,7 @@ const Heart = ({ emptyHeart, heart, active, id, changingState, dos }) => {
   }, [changingState]);
 
   const handleHeart = () => {
+    console.log("jaaj heart");
     if (heartActive) {
       setHeartActive(false);
       let options = {
@@ -39,15 +40,22 @@ const Heart = ({ emptyHeart, heart, active, id, changingState, dos }) => {
     }
   };
   return (
-    <img
-      className={
-        heartActive
-          ? "heart-component animationHeart"
-          : "heart-component animation"
-      }
-      onClick={handleHeart}
-      src={heartActive ? heart : emptyHeart}
-    />
+    <div
+      className="container-heart"
+      onClick={() => {
+        console.log("loliisisis");
+        handleHeart();
+      }}
+    >
+      <img
+        className={
+          heartActive
+            ? "heart-component animationHeart"
+            : "heart-component animation"
+        }
+        src={heartActive ? heart : emptyHeart}
+      />
+    </div>
   );
 };
 
