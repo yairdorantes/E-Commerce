@@ -1,7 +1,4 @@
 import "./styles/product-view.scss";
-import img1 from "../media/p1.jpg";
-import img2 from "../media/p2.jpg";
-import img3 from "../media/p3.jpg";
 import { useEffect, useState, useContext } from "react";
 import GenerateStars from "./GenerateStars";
 import CartContext from "../context/CartContext";
@@ -30,11 +27,12 @@ const ProductView = () => {
   }, []);
 
   const setImage = (e) => {
-    setImgSrc(e.target.src);
+    setImgSrc(e.target.getAttribute("image"));
     setImgSelected(e.target.id);
   };
   const increment = () => {
-    quantityChoosen < stock && setQuantity(quantityChoosen + 1);
+    console.log("xd");
+    quantityChoosen < product.stock && setQuantity(quantityChoosen + 1);
   };
   const decrement = () => {
     quantityChoosen > 1 && setQuantity(quantityChoosen - 1);
@@ -61,58 +59,50 @@ const ProductView = () => {
       <div className="container-product-view">
         <div className="container-imgs">
           <div className="container-main-img">
-            <img src={product.main_image} alt="" />
+            <img src={imgSrc || product.main_image} alt="" />
           </div>
           <div className="container-mini-images">
             <div
+              className="container-main-image-product-view"
               id={0}
+              image={product.main_image}
               style={{
                 backgroundImage: "url(" + product.main_image + ")",
                 filter:
-                  imgSelected == 0 ? "brightness(100%)" : "brightness(80%)",
+                  imgSelected == 0 ? "brightness(100%)" : "brightness(60%)",
                 border:
                   imgSelected == 0
-                    ? "3px solid #3483fa"
-                    : "3px solid rgba(0, 0, 0, 0)",
+                    ? "2px solid #3483fa"
+                    : "2px solid rgba(0, 0, 0, 0)",
               }}
-              className="container-main-image-product-view"
               onClick={setImage}
             ></div>
-            {/* <img
-              id={0}
-              src={product.main_image}
-              style={{
-                filter:
-                  imgSelected == 0 ? "brightness(100%)" : "brightness(80%)",
-                border:
-                  imgSelected == 0
-                    ? "3px solid #3483fa"
-                    : "3px solid rgba(0, 0, 0, 0)",
-              }}
-              onClick={setImage}
-              alt=""
-            /> */}
-            {/* {product.extra_images.map((image, id) => {
-              return (
-                <img
-                  style={{
-                    filter:
-                      imgSelected == id + 1
-                        ? "brightness(100%)"
-                        : "brightness(80%)",
-                    border:
-                      imgSelected == id + 1
-                        ? "3px solid #3483fa"
-                        : "3px solid rgba(0, 0, 0, 0)",
-                  }}
-                  key={id}
-                  id={id + 1}
-                  onClick={setImage}
-                  src={image}
-                  alt=""
-                />
-              );
-            })} */}
+
+            {product.extra_images &&
+              product.extra_images.map((image, id) => {
+                return (
+                  <div
+                    className="extra-images"
+                    style={{
+                      backgroundImage: "url(" + image + ")",
+
+                      filter:
+                        imgSelected == id + 1
+                          ? "brightness(100%)"
+                          : "brightness(60%)",
+                      border:
+                        imgSelected == id + 1
+                          ? "2px solid #3483fa"
+                          : "2px solid rgba(0, 0, 0, 0)",
+                    }}
+                    key={id}
+                    id={id + 1}
+                    onClick={setImage}
+                    image={image}
+                    alt=""
+                  ></div>
+                );
+              })}
           </div>
         </div>
         <div className="container-product-info-view">
@@ -124,7 +114,7 @@ const ProductView = () => {
           </div>
           <div className="price-product-view">
             <div className="under-price">${product.price}</div>
-
+            {/* HANDLE ITEMS */}
             <div className="container-add-dicrement">
               {/* <ChoosingQuantity stock={stock} /> */}
               <div className="choose-quantity">
@@ -146,6 +136,7 @@ const ProductView = () => {
                 <div className="stock-info">{`(${product.stock} disponibles)`}</div>
               </div>
             </div>
+            {/* ENDS HANDLE ITEMS */}
           </div>
           <div className="container-buttons-buy-add">
             <button className="btn-buy-now">Comprar Ahora</button>

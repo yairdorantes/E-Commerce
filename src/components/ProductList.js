@@ -10,7 +10,7 @@ import { helpHttp } from "../helpers/helpHttp";
 import { useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 const ProductList = ({ searchType }) => {
-  console.log({ searchType });
+  // console.log({ searchType });
   const { user } = useContext(AuthContext);
   const paramsUrl = useParams();
 
