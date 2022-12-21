@@ -48,9 +48,18 @@ const ShoppingCart = () => {
               isActive ? "container-cart cart-show" : "container-cart cart-hide"
             }
           >
-            <button className="arrow-left" onClick={handleVisibility}>
-              <img src={arrowLeft} alt="" />
-            </button>
+            <div
+              style={{
+                backgroundColor: "red",
+              }}
+            >
+              <button className="arrow-left" onClick={handleVisibility}>
+                <img src={arrowLeft} alt="" />
+              </button>
+              <div className="title-cart">
+                <strong>Carrito de Compras</strong>
+              </div>
+            </div>
             <div className="container-items-cart">
               {cartItems.length > 0 ? (
                 cartItems.map((item, key) => {
@@ -87,10 +96,16 @@ const ShoppingCart = () => {
               )}
             </div>
             <div className="container-total">
+              <hr />
               <div className="container-texts">
-                <div>Subtotal</div>
-                <div>${total}</div>
+                <div className="subtotal-text">
+                  <strong>Subtotal:</strong>
+                </div>
+                <div className="total-cart">
+                  <strong>${total}</strong>
+                </div>
               </div>
+              <div className="checkout-cart">CONTINUAR COMPRA</div>
             </div>
             {/* {isLoading ? <div>cargndo</div> : <div>no cargado</div>} */}
           </div>

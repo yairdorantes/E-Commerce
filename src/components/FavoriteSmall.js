@@ -62,38 +62,40 @@ const FavoriteSmall = ({ isActiveFavorites, handleShow }) => {
     >
       <OutsideClickHandler onOutsideClick={hideModal}>
         <div className="container-favs-small">
-          {favorites &&
-            favorites.map((fav, key) => {
-              return (
-                <div key={key}>
-                  <div className="container-fav">
-                    <div
-                      className="container-image-fav"
-                      style={{
-                        backgroundImage: "url(" + fav.main_image + ")",
-                      }}
-                    >
-                      {/* <img className="fav-image" src={fav.main_image} alt="" /> */}
-                    </div>
-                    <div>
-                      <div>{fav.description}</div>
-                      <div className="price-fav">${fav.price}</div>
+          <div className="container-just-favs">
+            {favorites &&
+              favorites.map((fav, key) => {
+                return (
+                  <div key={key}>
+                    <div className="container-fav">
                       <div
-                        onClick={() => deleteFavorite(fav.id)}
-                        className="link-delete-fav"
+                        className="container-image-fav"
+                        style={{
+                          backgroundImage: "url(" + fav.main_image + ")",
+                        }}
                       >
-                        Eliminar
+                        {/* <img className="fav-image" src={fav.main_image} alt="" /> */}
+                      </div>
+                      <div>
+                        <div>{fav.description}</div>
+                        <div className="price-fav">${fav.price}</div>
+                        <div
+                          onClick={() => deleteFavorite(fav.id)}
+                          className="link-delete-fav"
+                        >
+                          Eliminar
+                        </div>
                       </div>
                     </div>
+                    <hr className="h-re-fav" />
                   </div>
-                  <hr className="h-re-fav" />
-                </div>
-              );
-            })}
-          <Link to="/favorites">
-            <div className="all-favs">Ver todos</div>
-          </Link>
+                );
+              })}
+          </div>
         </div>
+        <Link to="/favorites" onClick={hideModal}>
+          <div className="all-favs">Ver todos</div>
+        </Link>
       </OutsideClickHandler>
     </Modal>
   );

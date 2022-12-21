@@ -1,13 +1,24 @@
+$padding-left: 20px;
 @mixin reset-btn-product-view {
-  border: none;
-  border-radius: 2px;
-  width: 250px;
-  height: 45px;
-  font-size: 16px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 600;
+  width: 300px;
   margin: auto;
+  height: 45px;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  outline: none;
+  border-radius: 10px;
+  border: none;
+  font-size: 17px;
+  box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+    7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+
+  &:active {
+    top: 2px;
+  }
 }
 .container-product-view {
   width: 100%;
@@ -20,9 +31,16 @@
   padding: 20px;
 }
 .container-imgs {
-  width: 360px;
-  height: 350px;
+  max-width: 390px;
+  min-width: 390px;
 }
+@media (max-width: 480px) {
+  .container-imgs {
+    max-width: 90%;
+    min-width: 99%;
+  }
+}
+
 .container-main-img {
   display: flex;
   align-items: center;
@@ -38,13 +56,11 @@
 
 .container-mini-images {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   gap: 2px;
-  // align-items: center;
   width: 100%;
-  // height: 110px;
   .container-main-image-product-view {
-    width: 90px;
+    width: 24%;
     height: 90px;
     background-size: cover;
     background-position: center;
@@ -52,18 +68,18 @@
   .extra-images {
     background-size: cover;
     background-position: center;
-    width: 90px;
+    width: 24%;
     height: 90px;
   }
   @media (max-width: 480px) {
     .container-main-image-product-view {
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
     }
 
     .extra-images {
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
     }
   }
 }
@@ -96,22 +112,20 @@
 }
 
 .btn-buy-now {
-  background-color: #f68a53;
+  background-color: #44ba60;
+
   color: white;
   @include reset-btn-product-view();
 }
 .btn-add-cart {
-  background-color: #f5e2ce;
+  background-color: #3a86ff;
   color: #f68a53;
   @include reset-btn-product-view();
 }
 
 .container-product-info-view {
-  // margin-top: 200px;
-  // background-color: #232726;
   margin-left: 20px;
   width: 350px;
-  // margin-top: 10px;
   .how-many-sold {
     font-size: 14px;
     color: #52dbca;
@@ -126,45 +140,77 @@
   .container-product-info-view {
     margin-left: 0px;
 
-    margin-top: 80px;
+    margin-top: 35px;
   }
 }
 
 .container-features-details {
-  margin-top: 250px;
-  width: 100%;
-  div {
-    font-weight: 500;
+  margin: auto;
+  width: 390px;
+  display: flex;
+  // padding-left: $padding-left;
+  background-color: #020218;
+  flex-direction: column;
+  .descrip-title {
+    font-weight: 900;
   }
-  p {
-    white-space: pre-wrap;
-    // width: 650px;
-    width: 100%;
+  .info-product {
+    // width: 600px;
+    margin: auto;
+  }
+  @media (max-width: 480px) {
+    .container-features-details {
+      max-width: 100%;
+      padding-left: 0px;
+    }
+  }
+}
+
+.container-reviews {
+  // display: flex;
+  // flex-direction: column;
+  margin: auto;
+  margin-top: 100px;
+  flex-wrap: wrap;
+  width: 450px;
+  padding-left: $padding-left;
+  // background-color: #081b2e;
+  .title-reviews {
+  }
+}
+@media (max-width: 480px) {
+  .container-reviews {
+    width: 90%;
+
+    padding-left: 0px;
   }
 }
 .container-opinions {
   position: relative;
-  width: 100%;
+  margin-bottom: 100px;
+
+  // width: 100%;
   .opinion-box {
-    width: 80%;
-    margin: auto;
     margin-top: 50px;
+    width: 100%;
     p {
       width: 90%;
+      font-size: 15px;
       white-space: pre-wrap;
     }
 
     img {
-      width: 13px;
+      width: 12px;
     }
     .h-re {
-      width: 70%;
-      margin: auto;
+      width: 90%;
       border: none;
       height: 0.1px;
-      background-color: rgba(255, 255, 255, 0.091);
-      margin-top: 27px;
+      background-color: rgba(255, 255, 255, 0.124);
+      margin-top: 28px;
       position: absolute;
+      left: 50%;
+      transform: translate(-55%);
     }
   }
 }

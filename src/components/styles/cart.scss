@@ -1,3 +1,10 @@
+@mixin maring-rounded-text {
+  border-radius: 20px;
+  width: 100px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid rgb(1, 228, 1);
+}
 .container-cart {
   background-color: #1d1c1c;
   height: 100vh;
@@ -10,7 +17,7 @@
     border: none;
     position: absolute;
     left: 0;
-    top: 0;
+    top: -4px;
     img {
       width: 40px;
     }
@@ -34,17 +41,21 @@
 }
 .container-img-text-item {
   position: relative;
+  margin: auto;
   display: flex;
+
   gap: 10px;
   height: 100px;
-  background-color: rgba(182, 177, 177, 0.387);
+  width: 98%;
+  border-radius: 5px;
+  background-color: #172a41;
   height: 130px;
   align-items: center;
   // img {
   //   width: 100px;
   // }
   p {
-    max-width: 78%;
+    max-width: 75%;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -69,18 +80,58 @@
     bottom: 0;
   }
 }
+.title-cart {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  top: 4px;
+  letter-spacing: 1px;
+  // margin-top: 12px;
+}
 .container-total {
-  background-color: #b3a7cc4b;
+  background-color: #1c3940;
   position: absolute;
   width: 100%;
   bottom: 0;
-  height: 150px;
+  height: 145px;
   .container-texts {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: 15px;
+    font-size: 18px;
+  }
+  .total-cart {
+    @include maring-rounded-text();
+  }
+  .subtotal-text {
+    @include maring-rounded-text();
+  }
+  .checkout-cart {
+    left: 50%;
+    transform: translate(-50%);
+    top: 20px;
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
+      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
+    background: #4433ff;
+    &:hover {
+      background-color: #3a86ff;
+    }
   }
 }
+
 .cart-show {
   animation: slideSide 0.8s ease-in-out;
 }

@@ -1,0 +1,29 @@
+.container-menu-mobile {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  bottom: 0;
+  height: 39px;
+
+  width: 100%;
+  background-color: rgb(9, 29, 40);
+}
+
+.hr-mobile {
+  border: none;
+  height: 2px;
+  background-color: #5efbe9;
+  transition: 0.2s ease-in-out;
+}
+.hide-hr {
+  opacity: 0;
+}
+.icon-menu-mobile {
+  width: 22px;
+}
+@media (min-width: 1200px) {
+  .container-menu-mobile {
+    display: none;
+  }
+}

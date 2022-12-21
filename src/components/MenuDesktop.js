@@ -4,7 +4,6 @@ import userIcon from "../media/usuario.png";
 import searchIcon from "../media/search.png";
 import heart from "../media/heartMenu.png";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import AuthContext from "../context/AuthContext";
 import CartContext from "../context/CartContext";
 import FavoriteSmall from "./FavoriteSmall";
@@ -36,10 +35,7 @@ const MenuDesktop = () => {
               Store locator
             </a>
           </div>
-          <div
-            style={{ marginRight: "8%" }}
-            className="icon-name-commerce flex"
-          >
+          <div style={{ marginRight: "8%" }} className="icon-name-commerce">
             My Ecommerce
           </div>
           <div className="container-extra-data flex">

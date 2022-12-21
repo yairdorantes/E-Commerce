@@ -5,10 +5,12 @@ import CartContext from "../context/CartContext";
 import { helpHttp } from "../helpers/helpHttp";
 import { useParams } from "react-router-dom";
 import { vars } from "./variables";
+import Reviews from "./Reviews";
 
 const ProductView = () => {
   let { addToCart } = useContext(CartContext);
   const paramsUrl = useParams();
+  const productId = paramsUrl.id;
   const urlProduct = `${vars.mySite}product/${paramsUrl.id}`;
   const [product, setProduct] = useState({});
   const [imgSrc, setImgSrc] = useState(product.main_image);
@@ -150,25 +152,14 @@ const ProductView = () => {
             </button>
           </div>
         </div>
-        <div className="container-features-details">
-          <div>Descripcion</div>
-          <p>{product.product_details}</p>
-        </div>
-        {/* <div className="container-opinions">
-          {opinions.map((opinion, key) => {
-            return (
-              <div key={key} className="opinion-box">
-                <div>
-                  <GenerateStars fullStars={opinion.rating} />
-                  <div>{opinion.date}</div>
-                </div>
-                <p>{opinion.text}</p>
-                <hr />
-              </div>
-            );
-          })}
-        </div> */}
       </div>
+      <div className="container-features-details">
+        <div className="descrip-title">Descripcion</div>
+        <div className="info-product">
+          <p>{product.details}</p>
+        </div>
+      </div>
+      {product && <Reviews product={productId} state={product} />}
     </>
   );
 };

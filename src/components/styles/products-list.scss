@@ -15,7 +15,8 @@
   transition: 0.4s ease-in-out;
   position: relative;
   color: black;
-  background-color: rgb(255, 245, 245);
+  // background-color: rgb(255, 245, 245);
+  background-color: #ebebea;
   // color: aliceblue;
   height: 300px;
   width: 250px;
@@ -31,7 +32,7 @@
   &:hover {
     margin-top: -5px;
     color: white;
-    background-color: #12192c;
+    background-color: #16181c;
     .link-from-one-product {
       color: aliceblue;
     }
@@ -42,7 +43,7 @@
 .container-info-product {
   padding: 15px;
   // margin: 15px;
-  text-align: center;
+  text-align: left;
 }
 .container-img-product {
   position: relative;
