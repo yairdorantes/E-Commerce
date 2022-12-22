@@ -41,32 +41,6 @@
   width: 20px;
 }
 
-.input-search-menu {
-  border: none;
-  border-bottom: 1px solid #60ffeb;
-  background-color: transparent;
-  transition: 0.5s ease-in-out;
-
-  color: #60ffeb;
-  //   font-family: "Poppins", sans-serif;
-
-  text-align: center;
-  &::placeholder {
-    color: #60ffeb;
-  }
-  &:hover {
-    border-bottom: 1px solid white;
-  }
-  &:focus {
-    outline: none;
-    border-bottom: 1px solid white;
-  }
-}
-.icon-search {
-  position: absolute;
-  //   margin: 10px;
-  //   margin-left: 10px;
-}
 .num-items-in-cart {
   display: flex;
   align-items: center;

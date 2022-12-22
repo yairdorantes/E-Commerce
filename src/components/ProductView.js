@@ -14,7 +14,6 @@ const ProductView = () => {
   const urlProduct = `${vars.mySite}product/${paramsUrl.id}`;
   const [product, setProduct] = useState({});
   const [imgSrc, setImgSrc] = useState(product.main_image);
-  const [stars] = useState(Math.floor(product.rating));
   const [stock, setStock] = useState(product.stock);
   const [imgSelected, setImgSelected] = useState(0);
   const [quantityChoosen, setQuantity] = useState(1);
@@ -33,7 +32,6 @@ const ProductView = () => {
     setImgSelected(e.target.id);
   };
   const increment = () => {
-    console.log("xd");
     quantityChoosen < product.stock && setQuantity(quantityChoosen + 1);
   };
   const decrement = () => {
@@ -111,8 +109,12 @@ const ProductView = () => {
           <div className="how-many-sold">{product.sales} Vendidos</div>
           <div className="product-title">{product.description}</div>
           <div className="container-stars">
-            <GenerateStars fullStars={stars} />
-            <span>{`(${product.total_opinions})`}</span>
+            {product.rate_count > 0 && (
+              <GenerateStars
+                fullStars={Math.floor(product.rate / product.rate_count)}
+              />
+            )}
+            <span>{`(${product.rate_count})`}</span>
           </div>
           <div className="price-product-view">
             <div className="under-price">${product.price}</div>

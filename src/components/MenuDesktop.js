@@ -7,19 +7,19 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import CartContext from "../context/CartContext";
 import FavoriteSmall from "./FavoriteSmall";
+import Searching from "./Searching";
 const MenuDesktop = () => {
   let { user, logoutUser } = useContext(AuthContext);
-  let { cartItems, handleVisibility } = useContext(CartContext);
-  const [query, setQuery] = useState("");
+  let { handleVisibility } = useContext(CartContext);
   const [showFavorites, setShowFavorites] = useState(false);
-
+  const [modalSearch, setModalSearch] = useState(false);
+  const handleModal = () => {
+    modalSearch ? setModalSearch(false) : setModalSearch(true);
+  };
   const handleShowFavorites = () => {
     showFavorites ? setShowFavorites(false) : setShowFavorites(true);
-    console.log("desktop");
   };
-  const handleQuerySearch = (e) => {
-    setQuery(e.target.value);
-  };
+
   return (
     <>
       <nav>
@@ -39,19 +39,11 @@ const MenuDesktop = () => {
             My Ecommerce
           </div>
           <div className="container-extra-data flex">
-            <Link to={`/search/${query}`}>
-              <img
-                className="icon-menu-bar-desktop icon-search"
-                src={searchIcon}
-                alt=""
-              />
-            </Link>
-            <input
-              placeholder="Search"
-              onChange={handleQuerySearch}
-              type="text"
-              className="input-search-menu"
-            />
+            <div onClick={handleModal}>
+              <img className="icon-menu-bar-desktop" src={searchIcon} alt="" />
+            </div>
+
+            <Searching isOpening={modalSearch} setIsOpening={setModalSearch} />
             <div>
               <img className="icon-menu-bar-desktop" src={userIcon} alt="" />
               <span>{/* {user.user.name} {user.user.lastname} */}</span>
