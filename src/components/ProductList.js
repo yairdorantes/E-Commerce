@@ -1,5 +1,6 @@
 import "./styles/products-list.scss";
 import emptyHeart from "../media/emptyheart.png";
+
 import heart from "../media/heart.png";
 import Heart from "./Heart";
 import { Link } from "react-router-dom";
@@ -9,8 +10,7 @@ import { useContext, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import { useEffect } from "react";
 import AuthContext from "../context/AuthContext";
-const ProductList = ({ searchType }) => {
-  // console.log({ searchType });
+const ProductList = ({}) => {
   const { user } = useContext(AuthContext);
   const paramsUrl = useParams();
 
@@ -21,7 +21,6 @@ const ProductList = ({ searchType }) => {
   const [indexPage, setIndexPage] = useState(1);
   const [userFavs, setUserFavs] = useState([]);
   const getProducts = () => {
-    // http://localhost:4000/api/search/testing
     const urlGetProducts = `${vars.mySite}products-list/${skip}/${amount}/${paramsUrl.id}`;
     helpHttp()
       .get(urlGetProducts)
@@ -62,6 +61,9 @@ const ProductList = ({ searchType }) => {
       setUserFavs([...userFavs, id]);
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [handlePagination]);
 
   return (
     <>
@@ -70,75 +72,61 @@ const ProductList = ({ searchType }) => {
           userFavs &&
           products.map((product, index) => {
             return (
-              <div key={index} className="product-card">
-                <Link to={`/${paramsUrl.section}/${product.id}`}>
-                  <div
-                    className="container-img-product"
-                    style={{
-                      backgroundImage: "url(" + product.main_image + ")",
-                    }}
-                  ></div>
-                </Link>
-                <div
-                  className="myheart"
-                  onClick={() => handleHeart(product.id)}
+              <div key={index} className="card-daisy">
+                <figure
+                  className="h-44 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${product.main_image})` }}
                 >
-                  {/* {console.log(userFavs.includes(product.id), "sisisis")} */}
-                  <Heart
-                    emptyHeart={emptyHeart}
-                    heart={heart}
-                    active={userFavs.includes(product.id) ? true : false}
-                    id={product.id}
-                    changingState={products}
-                  />
-                </div>
-
-                <div className="container-info-price">
-                  <Link
-                    className="link-from-one-product"
-                    to={`/${paramsUrl.section}/${product.id}`}
+                  <div
+                    className="myheart"
+                    onClick={() => handleHeart(product.id)}
                   >
-                    <div className="container-info-product">
-                      {/* <h2>{product.title}</h2> */}
-                      <p>{product.description}</p>
-                    </div>
-                  </Link>
-                  <hr />
-                  <div className="container-price-fav">
-                    <div className="price-product-list">
-                      ${product.price}
-                      {product.discount > 0 && (
-                        <span className="discount-card">
-                          {product.discount}% OFF
-                        </span>
-                      )}
+                    {/* {console.log(userFavs.includes(product.id), "sisisis")} */}
+                    <Heart
+                      emptyHeart={emptyHeart}
+                      heart={heart}
+                      active={userFavs.includes(product.id) ? true : false}
+                      id={product.id}
+                      changingState={products}
+                    />
+                  </div>
+                </figure>
+                <Link className="" to={`/${paramsUrl.section}/${product.id}`}>
+                  <div className="card-body">
+                    <p>{product.description}</p>
+                    <h2 className="card-title">${product.price}</h2>
+                    <div className="card-actions justify-end">
+                      {/* <button className="btn btn-primary">Ver</button> */}
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             );
           })}
       </div>
       <div className="container-pagination">
-        <div
-          className={indexPage > 1 ? "" : "hidden-paginator"}
-          onClick={() => {
-            handlePagination(false);
-          }}
-        >
-          ˂ Anterior
-        </div>
-
-        <div>
-          <strong>{indexPage}</strong> de {pagination}
-        </div>
-        <div
-          className={indexPage < pagination ? "" : "hidden-paginator"}
-          onClick={() => {
-            handlePagination(true);
-          }}
-        >
-          Siguiente ˃
+        <div className="btn-group">
+          <button
+            className={indexPage > 1 ? "color-green" : "hidden-paginator"}
+            onClick={() => {
+              handlePagination(false);
+            }}
+          >
+            «
+          </button>
+          <button className="btn text-green-400 ">
+            <strong>{indexPage}</strong> de {pagination}
+          </button>
+          <button
+            className={
+              indexPage < pagination ? "color-green" : "hidden-paginator"
+            }
+            onClick={() => {
+              handlePagination(true);
+            }}
+          >
+            »
+          </button>
         </div>
       </div>
     </>

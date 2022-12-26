@@ -36,7 +36,7 @@ const ShoppingCart = () => {
   return (
     <>
       <Modal
-        className="modal"
+        className="modal-cart"
         ariaHideApp={false}
         style={customStyles}
         isOpen={isActive}

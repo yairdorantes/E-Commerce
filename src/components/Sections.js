@@ -57,8 +57,8 @@ const Sections = () => {
             >
               <div className="section-product">
                 <img className="section-logo" src={section.img} alt="" />
-                <div>{section.title}</div>
-                <div className="discount-section">{section.discount}% OFF</div>
+                <div className="section-title">{section.title}</div>
+                {/* <div className="discount-section">{section.discount}% OFF</div> */}
               </div>
             </Link>
           );
