@@ -105,7 +105,9 @@ const ShoppingCart = () => {
                   <strong>${total}</strong>
                 </div>
               </div>
-              <div className="checkout-cart">CONTINUAR COMPRA</div>
+              <div className="checkout-cart btn btn-active btn-accent w-1/2 mx-auto">
+                CONTINUAR COMPRA
+              </div>
             </div>
             {/* {isLoading ? <div>cargndo</div> : <div>no cargado</div>} */}
           </div>

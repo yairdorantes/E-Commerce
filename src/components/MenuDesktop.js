@@ -8,6 +8,8 @@ import AuthContext from "../context/AuthContext";
 import CartContext from "../context/CartContext";
 import FavoriteSmall from "./FavoriteSmall";
 import Searching from "./Searching";
+import homes from "../media/home.png";
+
 const MenuDesktop = () => {
   let { user, logoutUser } = useContext(AuthContext);
   let { handleVisibility } = useContext(CartContext);
@@ -15,9 +17,8 @@ const MenuDesktop = () => {
   const [modalSearch, setModalSearch] = useState(false);
   const [passed, setPassed] = useState(false);
   const [show, setShow] = useState(false);
+  const [scroll, setScroll] = useState(0);
   const currentUrl = window.location.pathname;
-  console.log(currentUrl);
-  console.log(currentUrl.includes("home"));
 
   const handleShow = () => {
     show ? setShow(false) : setShow(true);
@@ -25,7 +26,7 @@ const MenuDesktop = () => {
 
   // const [bg, setBg] = useState("#000000d5");
   const handleModal = () => {
-    modalSearch ? setModalSearch(false) : setModalSearch(true);
+    setModalSearch(true);
   };
   const handleShowFavorites = () => {
     showFavorites ? setShowFavorites(false) : setShowFavorites(true);
@@ -33,7 +34,7 @@ const MenuDesktop = () => {
   useEffect(() => {
     if (currentUrl.includes("home")) {
       const handleScroll = () => {
-        if (window.scrollY > 800) {
+        if (window.scrollY > 600) {
           setPassed(true);
         } else {
           setPassed(false);
@@ -51,68 +52,8 @@ const MenuDesktop = () => {
 
   return (
     <>
-      {/* <nav>
-        <div
-          classNameName="container-menu-desktop"
-          style={{
-            backgroundColor: !passed ? "" : "#000000d5",
-            backdropFilter: passed ? "blur(10px)" : "blur(5px)",
-          }}
-        >
-          <div classNameName="container-menus flex">
-            <a classNameName="link-menu-desktop" href="">
-              Shop
-            </a>
-            <a classNameName="link-menu-desktop" href="">
-              Company
-            </a>
-            <a classNameName="link-menu-desktop" href="">
-              Store locator
-            </a>
-          </div>
-          <div style={{ marginRight: "8%" }} classNameName="icon-name-commerce">
-            Bonyi
-          </div>
-          <div classNameName="container-extra-data flex">
-            <div onClick={handleModal}>
-              <img
-                classNameName="icon-menu-bar-desktop"
-                src={searchIcon}
-                alt=""
-              />
-            </div>
-
-            <Searching isOpening={modalSearch} setIsOpening={setModalSearch} />
-            <div>
-              <img
-                classNameName="icon-menu-bar-desktop"
-                src={userIcon}
-                alt=""
-              />
-            </div>
-            <div>
-              <img
-                onClick={handleShowFavorites}
-                classNameName="icon-menu-bar-desktop"
-                src={heart}
-                alt=""
-              />
-              <FavoriteSmall
-                isActiveFavorites={showFavorites}
-                handleShow={handleShowFavorites}
-              />
-            </div>
-
-            <div onClick={handleVisibility}>
-              <img classNameName="icon-menu-bar-desktop" src={carrito} alt="" />
-            </div>
-          </div>
-        </div>
-
-      
-      </nav> */}
       <nav className={!passed ? "bg-trans" : "bg-nav"}>
-        <div className="container flex flex-wrap items-center justify-between mx-auto">
+        <div className="container flex flex-wrap items-center justify-between h-12 mx-auto">
           <a href="https://flowbite.com/" className="flex items-center">
             <img
               src="https://flowbite.com/docs/images/logo.svg"
@@ -153,11 +94,23 @@ const MenuDesktop = () => {
             <ul className={passed ? "links-tailwind" : "links-trans"}>
               <li>
                 <a
-                  href="#"
+                  href="/home"
                   className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
                   aria-current="page"
                 >
-                  Home
+                  <img className="icon-nav" src={homes} alt="" />
+                </a>
+              </li>
+              <li onClick={handleModal}>
+                <a
+                  href="#"
+                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                >
+                  <img className="icon-nav" src={searchIcon} alt="" />
+                  <Searching
+                    isOpening={modalSearch}
+                    setIsOpening={setModalSearch}
+                  />
                 </a>
               </li>
               <li>
@@ -165,31 +118,29 @@ const MenuDesktop = () => {
                   href="#"
                   className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  About
+                  <img className="icon-nav" src={userIcon} alt="" />
                 </a>
               </li>
               <li>
                 <a
                   href="#"
+                  onClick={handleShowFavorites}
                   className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Services
+                  <img className="icon-nav" src={heart} alt="" />
+                  <FavoriteSmall
+                    isActiveFavorites={showFavorites}
+                    handleShow={handleShowFavorites}
+                  />
                 </a>
               </li>
               <li>
                 <a
                   href="#"
-                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  onClick={handleVisibility}
+                  className="block  py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Pricing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Contact
+                  <img className="icon-nav" src={carrito} alt="" />
                 </a>
               </li>
             </ul>

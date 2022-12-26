@@ -9,7 +9,7 @@ import store from "./store";
 
 function App() {
   return (
-    <>
+    <div className="bg-black">
       <AuthProvider>
         <CartProvider>
           <Provider store={store}>
@@ -20,7 +20,7 @@ function App() {
           </Provider>
         </CartProvider>
       </AuthProvider>
-    </>
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ import { useContext, useState } from "react";
 import { helpHttp } from "../helpers/helpHttp";
 import { useEffect } from "react";
 import AuthContext from "../context/AuthContext";
+import Footer from "./Footer";
 const ProductList = ({}) => {
   const { user } = useContext(AuthContext);
   const paramsUrl = useParams();
@@ -67,7 +68,7 @@ const ProductList = ({}) => {
 
   return (
     <>
-      <div className="container-cards-products">
+      <div className="container-cards-products ">
         {products &&
           userFavs &&
           products.map((product, index) => {
@@ -129,6 +130,7 @@ const ProductList = ({}) => {
           </button>
         </div>
       </div>
+      <div>.</div>
     </>
   );
 };

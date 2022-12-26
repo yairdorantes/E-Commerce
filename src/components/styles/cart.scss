@@ -114,27 +114,13 @@
     @include maring-rounded-text();
   }
   .checkout-cart {
-    left: 50%;
-    transform: translate(-50%);
-    top: 20px;
-    min-width: 130px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // position: absolute;
+    // left: 50%;
+    // transform: translate(-50%);
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border-radius: 5px;
-    border: none;
-    box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, 0.5),
-      7px 7px 20px 0px rgba(0, 0, 0, 0.1), 4px 4px 5px 0px rgba(0, 0, 0, 0.1);
-    background: #4433ff;
-    &:hover {
-      background-color: #3a86ff;
-    }
   }
 }
 

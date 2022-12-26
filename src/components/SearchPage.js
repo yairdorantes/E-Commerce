@@ -52,51 +52,34 @@ const SearchPage = () => {
         {products.length > 0 ? (
           products.map((product, index) => {
             return (
-              <div key={index} className="product-card">
-                <Link to={`/${paramsUrl.section}/${product.id}`}>
-                  <div
-                    className="container-img-product"
-                    style={{
-                      backgroundImage: "url(" + product.main_image + ")",
-                    }}
-                  ></div>
-                </Link>
-                <div
-                  className="myheart"
-                  onClick={() => handleHeart(product.id)}
+              <div key={index} className="card-daisy">
+                <figure
+                  className="h-44 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${product.main_image})` }}
                 >
-                  {/* {console.log(userFavs.includes(product.id), "sisisis")} */}
-                  <Heart
-                    emptyHeart={emptyHeart}
-                    heart={heart}
-                    active={userFavs.includes(product.id) ? true : false}
-                    id={product.id}
-                    changingState={products}
-                  />
-                </div>
-
-                <div className="container-info-price">
-                  <Link
-                    className="link-from-one-product"
-                    to={`/+/${product.id}`}
+                  <div
+                    className="myheart"
+                    onClick={() => handleHeart(product.id)}
                   >
-                    <div className="container-info-product">
-                      {/* <h2>{product.title}</h2> */}
-                      <p>{product.description}</p>
-                    </div>
-                  </Link>
-                  <hr />
-                  <div className="container-price-fav">
-                    <div className="price-product-list">
-                      ${product.price}
-                      {product.discount > 0 && (
-                        <span className="discount-card">
-                          {product.discount}% OFF
-                        </span>
-                      )}
+                    {/* {console.log(userFavs.includes(product.id), "sisisis")} */}
+                    <Heart
+                      emptyHeart={emptyHeart}
+                      heart={heart}
+                      active={userFavs.includes(product.id) ? true : false}
+                      id={product.id}
+                      changingState={products}
+                    />
+                  </div>
+                </figure>
+                <Link className="" to={`/${paramsUrl.section}/${product.id}`}>
+                  <div className="card-body">
+                    <p>{product.description}</p>
+                    <h2 className="card-title">${product.price}</h2>
+                    <div className="card-actions justify-end">
+                      {/* <button className="btn btn-primary">Ver</button> */}
                     </div>
                   </div>
-                </div>
+                </Link>
               </div>
             );
           })
@@ -107,6 +90,7 @@ const SearchPage = () => {
           </div>
         )}
       </div>
+      <div>.</div>
     </>
   );
 };

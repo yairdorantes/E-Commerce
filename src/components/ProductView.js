@@ -52,8 +52,8 @@ const ProductView = () => {
 
   return (
     <>
-      <section className=" body-font overflow-hidden  bg-dark text-white">
-        <div className="container px-5 py-24 mx-auto h-full">
+      <section className="body-font overflow-hidden  bg-dark text-white h-screen">
+        <div className="container px-5 py-24 mx-auto">
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             <img
               alt="ecommerce"
@@ -137,7 +137,7 @@ const ProductView = () => {
           </div>
         </div>
       </section>
-      {product && <Reviews product={productId} state={product} />}
+      {/* {product && <Reviews product={productId} state={product} />} */}
     </>
   );
 };

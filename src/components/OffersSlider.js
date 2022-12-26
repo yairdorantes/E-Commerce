@@ -50,6 +50,17 @@ const sections = [
 ];
 const OffersSlider = () => {
   const [offers, setOffers] = useState([]);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   console.log(`${vars}/offers`);
   useEffect(() => {
     helpHttp()
@@ -62,10 +73,11 @@ const OffersSlider = () => {
 
   return (
     <>
-      {/* <img src={offersImg.offer1.img} alt="" /> */}
-      {/* <div className="container-offers">offer</div> */}
+      <div className=" text-center my-5 text-4xl font-bold  tracking-wider	text-sky-100">
+        Secciones
+      </div>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={windowWidth < 1070 ? 1 : 3}
         spaceBetween={30}
         // pagination={{
         //   type: "bullets",
@@ -79,6 +91,7 @@ const OffersSlider = () => {
         modules={[Pagination, Navigation, Autoplay]}
         className="SwiperOffers"
       >
+        {/* <div>{windowWidth}</div> */}
         {sections &&
           sections.map((section, key) => {
             return (
